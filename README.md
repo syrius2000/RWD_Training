@@ -1,4 +1,4 @@
-# RWD_Training
+# RWD Training
 A training course to familiarize yourself with the environment for analyzing RWD data.
 
 要するにCUI、Linux（MAC CUI環境）でフラットデータを点検したり、Database化して解析テーブルを得るまでの下準備が皆*1ができるようにするトレーニングの作成を目指す。
@@ -20,7 +20,7 @@ SQLで必要な処置
 
 Copilotで英語にしただけでなんかかっこいい
 
-# RWD_Training
+# RWD Training
 
 This repository is a training course designed to familiarize users with the environment for analyzing RWD (Real World Data). The training focuses on using command-line interfaces (CUI), Linux (or MAC CUI environments), and tools such as `cat`, `awk`, and `mysql8.0` to inspect flat data, transform it into databases, and prepare analytical tables.
 
