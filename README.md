@@ -17,3 +17,15 @@ SQLで必要な処置
 
 
 *1 CUIに慣れている人は自習するとして、GUIに慣れきった（Windowsの標準的利用したことがない人々）をCUIマンセーに改宗させる文書を目指す。
+
+Copilotで英語にしただけでなんかかっこいい
+
+# RWD_Training
+
+This repository is a training course designed to familiarize users with the environment for analyzing RWD (Real World Data). The training focuses on using command-line interfaces (CUI), Linux (or MAC CUI environments), and tools such as `cat`, `awk`, and `mysql8.0` to inspect flat data, transform it into databases, and prepare analytical tables.
+
+Key Points:
+- **Flat Data Processing**: Includes deduplication and understanding the data structure.
+- **SQL Processing**: Involves creating tables without duplicates and achieving required structures using SQL (including SQL2002 partitioning).
+- **Self-Study and References**: Emphasizes the importance of citing references and suggests excellent literature for self-study, especially for those accustomed to GUI environments.
+- 
