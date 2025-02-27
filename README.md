@@ -1,6 +1,8 @@
 # RWD Training
 A training course to familiarize yourself with the environment for analyzing RWD data.
 
+（大学で一部変更）
+
 要するにCUI、Linux（MAC CUI環境）でフラットデータを点検したり、Database化して解析テーブルを得るまでの下準備が皆*1ができるようにするトレーニングの作成を目指す。
 
 cat, awk, mysql8.0,.. などを主体にフラットデータをSQLで抽出して解析テーブルを作る。
