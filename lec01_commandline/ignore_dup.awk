@@ -1,0 +1,1 @@
+#!env gawk -f# /* set expandtab */print $1  # !colnames[$0]++ { print }# END {#     for (LEN in colnames) {#         print LEN#     }# }
