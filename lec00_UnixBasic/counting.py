@@ -1,13 +1,14 @@
-#!/Users/manabu/.pyenv/shims/python3
+#!/bin/env python3
 # vim: set fileencoding=utf-8, setl expandtab
 
 """
 # File name  : counting.py
 # __version__ = "$Revision: 0.1 $"
-# __date__ = "$Date :  $"
-# Last Change: 2025/03/27 14:23$
+# date = 2025/01/20 18:23
+# Last Change: 2025/04/03 14:48$
 # __author__ = "Manabu Yamaguchi"
 
+ターミナルとのセッションが切れても、tmux , screen を利用すれば問題ないことを示す例として
 """
 
 import time

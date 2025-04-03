@@ -1,0 +1,1 @@
+#!/bin/bash# 変換対象のディレクトリを指定 (カレントディレクトリの場合は ".")DIR="."# 変換後のファイル拡張子を指定NEW_EXT=".utf8"find "$DIR" -type f -name "*.txt" -exec bash -c '  for file do    iconv -f SJIS -t UTF-8 "$file" > "${file}${NEW_EXT}"    # 必要に応じて元のファイルを削除    # rm "$file"  done' bash {} +

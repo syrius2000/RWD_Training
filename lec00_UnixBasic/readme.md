@@ -1,17 +1,19 @@
 # UNIXというCUIベースのOSの勉強
 
 
-## CLIを便利にする'screen'と'tmux'
+## Terminal 生活に必須の'screen'と'tmux'
 
-UNIX はGUI(Graphic User Interface)操作もできるがCU(Command Line Interface)で操作することが多い。
+UNIX系OS はGUI(Graphic User Interface)操作もできるがCUI (Command Line Interface)で操作することが多い。
+そもそもサーバー管理の場面ではGUIなどない。
 
-このとき、操作画面はターミナルのクライアントソフトを操作し、ターミナルのサーバーが命令を実行する。
+UNIX系OS操作はターミナルのクライアントソフトを操作し、ターミナルのサーバーが命令を実行する。
+実行はローカル、リモートホストに差異は無い。
 
 ローカルのターミナル操作に加えてクライアント・サーバー接続での利用も一般に行われる。
 
-クライアント <==> TCP/IPやSOCKET通信 <==> クライアント
+ - クライアント <==> メモリややSOCKET通信 <==> クライアント
+ - クライアント <==> TCP/IP <==> サーバー
 
-クライアント <==> TCP/IP <==> サーバー
 
 標準的・基本的なターミナルソフトにはいくつかの不便が存在する
 
@@ -46,8 +48,9 @@ UNIX はGUI(Graphic User Interface)操作もできるがCU(Command Line Interfac
 
 以上3つを峻別する。
 
-demoにて分割したりコピペしてみる。
 
+demoにて分割したりコピペしてみる。
+![tmux sample image](/IMAGE/TMUX.png)
 
 ### screen
 [先達の素晴らしいscreen 紹介ページを参考](https://qiita.com/SAITO_Keita/items/b79ebc5af64aad28fc4a)
@@ -57,6 +60,15 @@ demoにて分割したりコピペしてみる。
 dot.screenrc を参考に設定を変更することを勧める。
 とくに'hardstatus'の設定はウインドウ迷子にならぬよう、必須な設定。
 
-demoにて分割したりコピペしてみる。
+## Let's えんしゅう
+
+演習として下記を行う
+
+ - screen, tmux を起動してみる
+ - screen で複数セッションの起動/切り替えを経験する
+ - tmux に複数セッションの起動/切り替えを経験する
+ - tmux ではさらにペインという分割が経験できる
+
+dot.hogefuga を参考に設定すると良い。
 
 
