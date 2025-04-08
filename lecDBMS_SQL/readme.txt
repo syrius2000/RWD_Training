@@ -13,21 +13,3 @@ code_1-10.txt	10 SQLで数列を扱う
 code_3-A.txt	A 演習問題の解答
 
 
-
-
-
-
-  runtimepath=
-/Applications/MacVim.app/Contents/Resources/vim/runtime
-/Applications/MacVim.app/Contents/Resources/vim/runtime/pack/dist/opt/netrw
-/Applications/MacVim.app/Contents/Resources/vim/vimfiles
-/Applications/MacVim.app/Contents/Resources/vim/vimfiles/after
-/opt/homebrew/opt/fzf
-~/.cache/dein/.cache/.vimrc/.dein
-~/.cache/dein/.cache/.vimrc/.dein/after
-~/.cache/dein/repos/github.com/Shougo/dein.vim
-~/.vim
-~/.vim/after
-~/.vim/pathoplugin/kaoriya
-~/.vim/pathoplugin/qfixhowm
-~/.vim/pathoplugin/vimdoc-ja
