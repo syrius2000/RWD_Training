@@ -3,6 +3,8 @@
 -- initialize DB(Training) , initial user and grants ALL
 -- SET APPROPRIATE PASSWORDS
 
+DROP DATABASE IF EXISTS Training ;
+
 CREATE DATABASE IF NOT EXISTS Training ;
 
 GRANT ALTER ON Training.* TO 'root'@'localhost';
@@ -28,11 +30,10 @@ GRANT GRANT OPTION ON Training.* TO 'root'@'localhost';
 
 DROP USER IF EXISTS user;
 ALTER USER 'user'@'localhost' IDENTIFIED BY 'user';
-ALTER USER 'user'@'%' IDENTIFIED BY 'user';
-ALTER USER 'jeffrey'@'localhost' IDENTIFIED BY 'root3543';
-
 GRANT ALL ON Training.* TO 'user'@'localhost';
-GRANT ALL ON Training.* TO 'user'@'%';
+
+-- ALTER USER 'user'@'%' IDENTIFIED BY 'user';
+-- GRANT ALL ON Training.* TO 'user'@'%';
 
 -- -- dont foget it !
 FLUSH PRIVILEGES;
