@@ -5,7 +5,7 @@
 
 フラットファイル（CSVやTSVなど）でデータを得ることが多い。
 
-このとき、フラットファイルに重複レコードが存在する場面がある。重複を除いて正しいしし
+このとき、フラットファイルに重複レコードが存在する場面がある。重複を除いて正しい
 集計を可能にする。
 
 ### 重複のパターンに注意する
@@ -26,13 +26,10 @@
  unix TEXT utils の標準である`uniq`コマンドは`sort | uniq` とパイプしなければならな
 ならない。
 
-![複数連続](/IMAGE/ClinicalExamSample.png)
+![連続した重複](/IMAGE/ClinicalExamSample.png)
 
 uniq ClinicalExamSampleNotSorted.csv | wc
       8       8     457
-
-
-ClinicalExamSampleNotSorted.csv
 
 sort ClinicalExamSampleNotSorted.csv | uniq | wc
       8       8     457
