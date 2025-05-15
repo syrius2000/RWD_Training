@@ -32,6 +32,31 @@ DROP USER IF EXISTS user;
 ALTER USER 'user'@'localhost' IDENTIFIED BY 'user';
 GRANT ALL ON Training.* TO 'user'@'localhost';
 
+
+CREATE USER 'user'@'%' IDENTIFIED BY 'user';
+GRANT ALTER ON Training.* TO 'user'@'%';
+GRANT CREATE ON Training.* TO 'user'@'%';
+GRANT CREATE VIEW ON Training.* TO 'user'@'%';
+GRANT DELETE ON Training.* TO 'user'@'%';
+GRANT DROP ON Training.* TO 'user'@'%';
+GRANT GRANT OPTION ON Training.* TO 'user'@'%';
+GRANT INDEX ON Training.* TO 'user'@'%';
+GRANT INSERT ON Training.* TO 'user'@'%';
+GRANT REFERENCES ON Training.* TO 'user'@'%';
+GRANT SELECT ON Training.* TO 'user'@'%';
+GRANT SHOW VIEW ON Training.* TO 'user'@'%';
+GRANT TRIGGER ON Training.* TO 'user'@'%';
+GRANT UPDATE ON Training.* TO 'user'@'%';
+GRANT ALTER ROUTINE ON Training.* TO 'user'@'%';
+GRANT CREATE ROUTINE ON Training.* TO 'user'@'%';
+GRANT CREATE TEMPORARY TABLES ON Training.* TO 'user'@'%';
+GRANT EXECUTE ON Training.* TO 'user'@'%';
+GRANT LOCK TABLES ON Training.* TO 'user'@'%';
+GRANT GRANT OPTION ON Training.* TO 'user'@'%';
+
+
+
+
 -- ALTER USER 'user'@'%' IDENTIFIED BY 'user';
 -- GRANT ALL ON Training.* TO 'user'@'%';
 

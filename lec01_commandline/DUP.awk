@@ -1,1 +1,1 @@
-   !colnames[$0]++
+    !colnames[$0]++# gawk 'colnames[$0]++ == 0{print} ' 検査結果2021UTF8.csv | wc
