@@ -1,4 +1,4 @@
--- 2023/06/15
+-- 2025-05-21
 --
 -- initialize DB(RWD) , initial user and grants ALL
 -- SET APPROPRIATE PASSWORDS
@@ -6,20 +6,21 @@
 CREATE DATABASE IF NOT EXISTS RWD ;
 CREATE DATABASE IF NOT EXISTS DWH ;
 CREATE DATABASE IF NOT EXISTS COVID ;
+CREATE DATABASE IF NOT EXISTS VACCIN ;
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'fuga';
 ALTER USER 'root'@'%' IDENTIFIED BY 'fuga';
 
 
--- 2023/09/14
-DROP  USER 'root'@'127.0.0.1';
-CREATE USER IF NOT EXISTS 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
-ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
-GRANT ALL ON *.* TO 'root'@'127.0.0.1';
+--
+-- DROP  USER 'root'@'127.0.0.1';
+-- CREATE USER IF NOT EXISTS 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
+-- ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
+-- GRANT ALL ON *.* TO 'root'@'127.0.0.1';
 
-DROP  USER 'root'@'%';
+DROP  USER 'RWDadmin'@'%';
 CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'fugafuga';
-ALTER USER 'root'@'%' IDENTIFIED BY 'fuga';
+ALTER USER 'RWDadmin'@'%' IDENTIFIED BY 'fuga';
 GRANT ALL ON *.* TO 'root'@'%';
 
 FLUSH PRIVILEGES;
@@ -28,6 +29,7 @@ FLUSH PRIVILEGES;
 DROP USER IF EXISTS RWDadmin;
 DROP USER IF EXISTS RWDuser;
 
+-- DBに対するALLアクセスを設定 ------------------------------------------------
 -- Define user password
 DROP USER 'RWDadmin'@'%';
 CREATE USER IF NOT EXISTS 'RWDadmin'@'%' IDENTIFIED BY 'fugafuga';
@@ -48,16 +50,14 @@ CREATE USER IF NOT EXISTS 'RWDuser'@'%' IDENTIFIED BY 'fugafuga';
 GRANT ALL ON RWD.* TO 'RWDuser'@'%';
 GRANT ALL ON DWH.* TO 'RWDuser'@'%';
 GRANT ALL ON COVID.*   TO 'RWDuser'@'%';
+GRANT ALL ON VACCIN.*   TO 'RWDuser'@'%';
 
 CREATE USER IF NOT EXISTS "RWDuser"@"localhost" IDENTIFIED BY 'fugafuga';
 GRANT ALL ON RWD.* TO 'RWDuser'@'localhost';
 GRANT ALL ON DWH.* TO 'RWDuser'@'localhost';
 GRANT ALL ON COVID.* TO 'RWDuser'@'localhost';
+GRANT ALL ON VACCIN.*   TO 'RWDuser'@'%';
 
-CREATE USER IF NOT EXISTS "RWDuser"@"127.0.0.1" IDENTIFIED BY 'fugafuga';
-GRANT ALL ON RWD.* TO 'RWDuser'@'127.0.0.1';
-GRANT ALL ON DWH.* TO 'RWDuser'@'127.0.0.1';
-GRANT ALL ON COVID.* TO 'RWDuser'@'127.0.0.1';
 
 -- -- dont foget it !
 FLUSH PRIVILEGES;

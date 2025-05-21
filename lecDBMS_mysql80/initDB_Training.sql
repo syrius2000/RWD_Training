@@ -1,131 +1,94 @@
--- 2023/06/15
+-- 2025-05-21
 --
 -- initialize DB(Training) , initial user and grants ALL
 -- SET APPROPRIATE PASSWORDS
 
-DROP DATABASE IF EXISTS Training ;
+-- DROP DATABASE IF EXISTS Training ;
+-- CREATE DATABASE IF NOT EXISTS Training ;
 
-CREATE DATABASE IF NOT EXISTS Training ;
+-- CREATE はroot権限であらかじめ作成する必要あり。
+-- DROP USER IF EXISTS training ;
+-- CREATE USER training@'%' identified by "training";
+-- GRANT ALL ON Training.* TO 'training'@'%';
 
-GRANT ALTER ON Training.* TO 'root'@'localhost';
-GRANT CREATE ON Training.* TO 'root'@'localhost';
-GRANT CREATE VIEW ON Training.* TO 'root'@'localhost';
-GRANT DELETE ON Training.* TO 'root'@'localhost';
-GRANT DROP ON Training.* TO 'root'@'localhost';
-GRANT GRANT OPTION ON Training.* TO 'root'@'localhost';
-GRANT INDEX ON Training.* TO 'root'@'localhost';
-GRANT INSERT ON Training.* TO 'root'@'localhost';
-GRANT REFERENCES ON Training.* TO 'root'@'localhost';
-GRANT SELECT ON Training.* TO 'root'@'localhost';
-GRANT SHOW VIEW ON Training.* TO 'root'@'localhost';
-GRANT TRIGGER ON Training.* TO 'root'@'localhost';
-GRANT UPDATE ON Training.* TO 'root'@'localhost';
-GRANT ALTER ROUTINE ON Training.* TO 'root'@'localhost';
-GRANT CREATE ROUTINE ON Training.* TO 'root'@'localhost';
-GRANT CREATE TEMPORARY TABLES ON Training.* TO 'root'@'localhost';
-GRANT EXECUTE ON Training.* TO 'root'@'localhost';
-GRANT LOCK TABLES ON Training.* TO 'root'@'localhost';
-GRANT GRANT OPTION ON Training.* TO 'root'@'localhost';
-
-
-DROP USER IF EXISTS user;
-ALTER USER 'user'@'localhost' IDENTIFIED BY 'user';
-GRANT ALL ON Training.* TO 'user'@'localhost';
-
-
-CREATE USER 'user'@'%' IDENTIFIED BY 'user';
-GRANT ALTER ON Training.* TO 'user'@'%';
-GRANT CREATE ON Training.* TO 'user'@'%';
-GRANT CREATE VIEW ON Training.* TO 'user'@'%';
-GRANT DELETE ON Training.* TO 'user'@'%';
-GRANT DROP ON Training.* TO 'user'@'%';
-GRANT GRANT OPTION ON Training.* TO 'user'@'%';
-GRANT INDEX ON Training.* TO 'user'@'%';
-GRANT INSERT ON Training.* TO 'user'@'%';
-GRANT REFERENCES ON Training.* TO 'user'@'%';
-GRANT SELECT ON Training.* TO 'user'@'%';
-GRANT SHOW VIEW ON Training.* TO 'user'@'%';
-GRANT TRIGGER ON Training.* TO 'user'@'%';
-GRANT UPDATE ON Training.* TO 'user'@'%';
-GRANT ALTER ROUTINE ON Training.* TO 'user'@'%';
-GRANT CREATE ROUTINE ON Training.* TO 'user'@'%';
-GRANT CREATE TEMPORARY TABLES ON Training.* TO 'user'@'%';
-GRANT EXECUTE ON Training.* TO 'user'@'%';
-GRANT LOCK TABLES ON Training.* TO 'user'@'%';
-GRANT GRANT OPTION ON Training.* TO 'user'@'%';
-
-
-
+-- DROP USER IF EXISTS user;
+-- ALTER USER 'user'@'localhost' IDENTIFIED BY 'user';
+-- GRANT ALL ON Training.* TO 'user'@'localhost';
 
 -- ALTER USER 'user'@'%' IDENTIFIED BY 'user';
 -- GRANT ALL ON Training.* TO 'user'@'%';
-
 -- -- dont foget it !
-FLUSH PRIVILEGES;
+-- FLUSH PRIVILEGES;
 
 -- -- 1-1
 --
 -- /* 既存のコード体系を新しい体系に変換して集計 */
--- CREATE TABLE PopTbl
--- (pref_name VARCHAR(32) PRIMARY KEY,
---  population INTEGER NOT NULL);
---
--- INSERT INTO PopTbl VALUES('徳島', 100);
--- INSERT INTO PopTbl VALUES('香川', 200);
--- INSERT INTO PopTbl VALUES('愛媛', 150);
--- INSERT INTO PopTbl VALUES('高知', 200);
--- INSERT INTO PopTbl VALUES('福岡', 300);
--- INSERT INTO PopTbl VALUES('佐賀', 100);
--- INSERT INTO PopTbl VALUES('長崎', 200);
--- INSERT INTO PopTbl VALUES('東京', 400);
--- INSERT INTO PopTbl VALUES('群馬', 50);
---
+USE Training;
+
+DROP TABLE IF EXISTS PopTbl;
+CREATE TABLE PopTbl
+(pref_name VARCHAR(32) PRIMARY KEY,
+ population INTEGER NOT NULL);
+
+INSERT INTO PopTbl VALUES('徳島', 100);
+INSERT INTO PopTbl VALUES('香川', 200);
+INSERT INTO PopTbl VALUES('愛媛', 150);
+INSERT INTO PopTbl VALUES('高知', 200);
+INSERT INTO PopTbl VALUES('福岡', 300);
+INSERT INTO PopTbl VALUES('佐賀', 100);
+INSERT INTO PopTbl VALUES('長崎', 200);
+INSERT INTO PopTbl VALUES('東京', 400);
+INSERT INTO PopTbl VALUES('群馬', 50);
+
 --
 -- /* 異なる条件の集計を1つのSQLで行う */
--- CREATE TABLE PopTbl2
--- (pref_name VARCHAR(32),
---  sex CHAR(1) NOT NULL,
---  population INTEGER NOT NULL,
---     PRIMARY KEY(pref_name, sex));
---
--- INSERT INTO PopTbl2 VALUES('徳島', '1',	60 );
--- INSERT INTO PopTbl2 VALUES('徳島', '2',	40 );
--- INSERT INTO PopTbl2 VALUES('香川', '1',	100);
--- INSERT INTO PopTbl2 VALUES('香川', '2',	100);
--- INSERT INTO PopTbl2 VALUES('愛媛', '1',	100);
--- INSERT INTO PopTbl2 VALUES('愛媛', '2',	50 );
--- INSERT INTO PopTbl2 VALUES('高知', '1',	100);
--- INSERT INTO PopTbl2 VALUES('高知', '2',	100);
--- INSERT INTO PopTbl2 VALUES('福岡', '1',	100);
--- INSERT INTO PopTbl2 VALUES('福岡', '2',	200);
--- INSERT INTO PopTbl2 VALUES('佐賀', '1',	20 );
--- INSERT INTO PopTbl2 VALUES('佐賀', '2',	80 );
--- INSERT INTO PopTbl2 VALUES('長崎', '1',	125);
--- INSERT INTO PopTbl2 VALUES('長崎', '2',	125);
--- INSERT INTO PopTbl2 VALUES('東京', '1',	250);
--- INSERT INTO PopTbl2 VALUES('東京', '2',	150);
---
+DROP TABLE IF EXISTS PopTbl2;
+CREATE TABLE PopTbl2
+(pref_name VARCHAR(32),
+ sex CHAR(1) NOT NULL,
+ population INTEGER NOT NULL,
+    PRIMARY KEY(pref_name, sex));
+
+INSERT INTO PopTbl2 VALUES('徳島', '1',	60 );
+INSERT INTO PopTbl2 VALUES('徳島', '2',	40 );
+INSERT INTO PopTbl2 VALUES('香川', '1',	100);
+INSERT INTO PopTbl2 VALUES('香川', '2',	100);
+INSERT INTO PopTbl2 VALUES('愛媛', '1',	100);
+INSERT INTO PopTbl2 VALUES('愛媛', '2',	50 );
+INSERT INTO PopTbl2 VALUES('高知', '1',	100);
+INSERT INTO PopTbl2 VALUES('高知', '2',	100);
+INSERT INTO PopTbl2 VALUES('福岡', '1',	100);
+INSERT INTO PopTbl2 VALUES('福岡', '2',	200);
+INSERT INTO PopTbl2 VALUES('佐賀', '1',	20 );
+INSERT INTO PopTbl2 VALUES('佐賀', '2',	80 );
+INSERT INTO PopTbl2 VALUES('長崎', '1',	125);
+INSERT INTO PopTbl2 VALUES('長崎', '2',	125);
+INSERT INTO PopTbl2 VALUES('東京', '1',	250);
+INSERT INTO PopTbl2 VALUES('東京', '2',	150);
+
 --
 -- /* CHECK制約で複数の列の条件関係を定義する */
--- CREATE TABLE TestSal
--- (sex CHAR(1) ,
---  salary INTEGER,
---     CONSTRAINT check_salary CHECK
---              ( CASE WHEN sex = '2'
---                     THEN CASE WHEN salary <= 200000
---                               THEN 1 ELSE 0 END
---                     ELSE 1 END = 1 ));
---
--- INSERT INTO TestSal VALUES(1, 200000);
--- INSERT INTO TestSal VALUES(1, 300000);
--- INSERT INTO TestSal VALUES(1, NULL);
--- INSERT INTO TestSal VALUES(2, 200000);
--- INSERT INTO TestSal VALUES(2, 300000);  --error
--- INSERT INTO TestSal VALUES(2, NULL);
--- INSERT INTO TestSal VALUES(1, 300000);
---
---
+DROP TABLE IF EXISTS TestSal;
+CREATE TABLE TestSal
+(sex CHAR(1) ,
+ salary INTEGER,
+    CONSTRAINT check_salary CHECK
+             ( CASE WHEN sex = '2'
+                    THEN CASE WHEN salary <= 200000
+                              THEN 1 ELSE 0 END
+                    ELSE 1 END = 1 ));
+
+INSERT INTO TestSal VALUES(1, 200000);
+INSERT INTO TestSal VALUES(1, 300000);
+INSERT INTO TestSal VALUES(1, NULL);
+INSERT INTO TestSal VALUES(2, 200000);
+INSERT INTO TestSal VALUES(2, 300000);  --error
+INSERT INTO TestSal VALUES(2, NULL);
+INSERT INTO TestSal VALUES(1, 300000);
+
+
 -- /* 条件を分岐させたUPDATE */
+-- DROP TABLE IF EXISTS SomeTable;
 -- CREATE TABLE SomeTable
 -- (p_key CHAR(1) PRIMARY KEY,
 --  col_1 INTEGER NOT NULL,
@@ -137,6 +100,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* テーブル同士のマッチング */
+-- DROP TABLE IF EXISTS CourseMaster;
 -- CREATE TABLE CourseMaster
 -- (course_id   INTEGER PRIMARY KEY,
 --  course_name VARCHAR(32) NOT NULL);
@@ -146,6 +110,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO CourseMaster VALUES(3, '簿記検定');
 -- INSERT INTO CourseMaster VALUES(4, '税理士');
 --
+-- DROP TABLE IF EXISTS OpenCourses;
 -- CREATE TABLE OpenCourses
 -- (month       INTEGER ,
 --  course_id   INTEGER ,
@@ -160,6 +125,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* CASE式の中で集約関数を使う */
+-- DROP TABLE IF EXISTS StudentClub;
 -- CREATE TABLE StudentClub
 -- (std_id  INTEGER,
 --  club_id INTEGER,
@@ -178,6 +144,7 @@ FLUSH PRIVILEGES;
 --
 -- -- code 1-2
 --
+-- DROP TABLE IF EXISTS Shohin;
 -- CREATE TABLE Shohin
 -- (shohin_id     CHAR(4) NOT NULL,
 --  shohin_mei    VARCHAR(100) NOT NULL,
@@ -222,6 +189,7 @@ FLUSH PRIVILEGES;
 --                           AND CURRENT ROW);
 --
 --
+-- DROP TABLE IF EXISTS LoadSample;
 -- CREATE TABLE LoadSample
 -- (sample_date   DATE PRIMARY KEY,
 --  load_val      INTEGER NOT NULL);
@@ -234,6 +202,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO LoadSample VALUES('2018-02-12',   1000);
 --
 -- -- code 1-3
+-- DROP TABLE IF EXISTS Products;
 -- CREATE TABLE Products
 -- (name VARCHAR(16) PRIMARY KEY,
 --  price INTEGER NOT NULL);
@@ -258,6 +227,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Products VALUES('バナナ',	80);
 --
 -- -- 部分的に不一致なキーの検索
+-- DROP TABLE IF EXISTS Addresses;
 -- CREATE TABLE Addresses
 -- (name VARCHAR(32),
 --  family_id INTEGER,
@@ -282,6 +252,7 @@ FLUSH PRIVILEGES;
 --
 -- -- code 1-4
 --
+-- DROP TABLE IF EXISTS Students;
 -- CREATE TABLE Students
 -- (name CHAR(16) PRIMARY KEY,
 --  age  INTEGER  );
@@ -291,6 +262,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Students VALUES('ジョン',    NULL);
 -- INSERT INTO Students VALUES('ボギー',    21);
 --
+-- DROP TABLE IF EXISTS EmptyStr;
 -- CREATE TABLE EmptyStr
 -- ( str CHAR(8),
 --   description CHAR(16));
@@ -300,6 +272,7 @@ FLUSH PRIVILEGES;
 --
 -- -- code 1-5
 -- /* テーブルに存在「しない」データを探す */
+-- DROP TABLE IF EXISTS Meetings;
 -- CREATE TABLE Meetings
 -- (meeting CHAR(32) NOT NULL,
 --  person  CHAR(32) NOT NULL,
@@ -315,6 +288,8 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Meetings VALUES('第３回', '宮田');
 --
 -- -- /* 全称量化　その１：肯定⇔二重否定の変換に慣れよう */
+-- DROP TABLE IF EXISTS TestScores;
+1. 2.
 -- CREATE TABLE TestScores
 -- (student_id INTEGER,
 --  subject    VARCHAR(32) ,
@@ -332,6 +307,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO TestScores VALUES(400, '算数',80);
 --
 -- -- /* 全称量化　その２：集合VS 述語――凄いのはどっちだ？ */
+-- DROP TABLE IF EXISTS Projects;
 -- CREATE TABLE Projects
 -- (project_id VARCHAR(32),
 --  step_nbr   INTEGER ,
@@ -353,6 +329,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- -- /* 列に対する量化：オール１の行を探せ */
+-- DROP TABLE IF EXISTS ArrayTbl;
 -- CREATE TABLE ArrayTbl
 --  (keycol CHAR(1) PRIMARY KEY,
 --   col1  INTEGER,
@@ -377,6 +354,7 @@ FLUSH PRIVILEGES;
 --
 -- -- 演習問題
 -- /* 5-1：配列テーブル――行持ちの場合 */
+-- DROP TABLE IF EXISTS ArrayTbl2;
 -- CREATE TABLE ArrayTbl2
 --  (key   CHAR(1) NOT NULL,
 --     i   INTEGER NOT NULL,
@@ -418,6 +396,7 @@ FLUSH PRIVILEGES;
 -- -- code 1-6
 --
 -- /* データの歯抜けを探す */
+-- DROP TABLE IF EXISTS SeqTbl;
 -- CREATE TABLE SeqTbl
 -- (seq  INTEGER PRIMARY KEY,
 --  name VARCHAR(16) NOT NULL);
@@ -431,6 +410,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- -- 欠番を探せ：発展版
+-- DROP TABLE IF EXISTS SeqTbl;
 -- CREATE TABLE SeqTbl
 -- ( seq INTEGER NOT NULL PRIMARY KEY);
 --
@@ -466,6 +446,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO SeqTbl VALUES(8);
 -- INSERT INTO SeqTbl VALUES(10);
 --
+-- DROP TABLE IF EXISTS Graduates;
 -- CREATE TABLE Graduates
 -- (name   VARCHAR(16) PRIMARY KEY,
 --  income INTEGER NOT NULL);
@@ -482,6 +463,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Graduates VALUES('スコット',   10000);
 --
 --
+-- DROP TABLE IF EXISTS NullTbl;
 -- CREATE TABLE NullTbl (col_1 INTEGER);
 --
 -- INSERT INTO NullTbl VALUES (NULL);
@@ -490,7 +472,8 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* NULL を含まない集合を探す */
--- CREATE TABLE Students
+-- DROP TABLE IF EXISTS Students;
+-- CREATE TABLE Students;
 -- (student_id   INTEGER PRIMARY KEY,
 --  dpt          VARCHAR(16) NOT NULL,
 --  sbmt_date    DATE);
@@ -505,6 +488,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- -- 集合にきめ細かな条件を設定する
+-- DROP TABLE IF EXISTS TestResults;
 -- CREATE TABLE TestResults
 -- (student_id CHAR(12) NOT NULL PRIMARY KEY,
 --  class   CHAR(1)  NOT NULL,
@@ -529,6 +513,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- -- 全称文を述語で表現する
+-- DROP TABLE IF EXISTS Teams;
 -- CREATE TABLE Teams
 -- (member  CHAR(12) NOT NULL PRIMARY KEY,
 --  team_id INTEGER  NOT NULL,
@@ -548,6 +533,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Teams VALUES('ケーガン', 5, '待機');
 --
 -- -- 一意集合と多重集合
+-- DROP TABLE IF EXISTS Materials;
 -- CREATE TABLE Materials
 -- (center         CHAR(12) NOT NULL,
 --  receive_date   DATE     NOT NULL,
@@ -571,9 +557,11 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* 関係除算でバスケット解析 */
+-- DROP TABLE IF EXISTS Items;
 -- CREATE TABLE Items
 -- (item VARCHAR(16) PRIMARY KEY);
 --
+-- DROP TABLE IF EXISTS ShopItems;
 -- CREATE TABLE ShopItems
 -- (shop VARCHAR(16),
 --  item VARCHAR(16),
@@ -597,6 +585,7 @@ FLUSH PRIVILEGES;
 -- -- code 1-7
 --
 -- -- 成長・後退・現状維持
+-- DROP TABLE IF EXISTS Sales;
 -- CREATE TABLE Sales
 -- (year INTEGER NOT NULL ,
 --  sale INTEGER NOT NULL ,
@@ -612,6 +601,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Sales VALUES (1997, 55);
 --
 -- -- 時系列に歯抜けがある場合：直近と比較
+-- DROP TABLE IF EXISTS Sales2;
 -- CREATE TABLE Sales2
 -- (year INTEGER NOT NULL ,
 --  sale INTEGER NOT NULL ,
@@ -624,6 +614,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Sales2 VALUES (1997, 55);
 --
 -- -- オーバーラップする期間を調べる
+-- DROP TABLE IF EXISTS Reservations;
 -- CREATE TABLE Reservations
 -- (reserver    VARCHAR(30) PRIMARY KEY,
 --  start_date  DATE  NOT NULL,
@@ -658,6 +649,7 @@ FLUSH PRIVILEGES;
 --
 --
 -- --演習問題：1-6
+-- DROP TABLE IF EXISTS Accounts;
 -- CREATE TABLE Accounts
 -- (prc_date DATE NOT NULL ,
 --  prc_amt  INTEGER NOT NULL ,
@@ -677,6 +669,7 @@ FLUSH PRIVILEGES;
 --
 -- -- 1-8
 -- /* 外部結合で行列変換　その1（行→列）：クロス表を作る */
+-- DROP TABLE IF EXISTS Courses;
 -- CREATE TABLE Courses
 -- (name   VARCHAR(32),
 --  course VARCHAR(32),
@@ -691,6 +684,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Courses VALUES('渡辺', 'SQL入門');
 --
 -- /* 外部結合で行列変換　その2（列→行）：繰り返し項目を1 列にまとめる */
+-- DROP TABLE IF EXISTS Personnel;
 -- CREATE TABLE Personnel
 --  (employee   varchar(32),
 --   child_1    varchar(32),
@@ -705,16 +699,19 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* クロス表で入れ子の表側を作る */
+-- DROP TABLE IF EXISTS TblSex;
 -- CREATE TABLE TblSex
 -- (sex_cd   char(1),
 --  sex varchar(5),
 --  PRIMARY KEY(sex_cd));
 --
+-- DROP TABLE IF EXISTS TblAge;
 -- CREATE TABLE TblAge
 -- (age_class char(1),
 --  age_range varchar(30),
 --  PRIMARY KEY(age_class));
 --
+-- DROP TABLE IF EXISTS TblPop;
 -- CREATE TABLE TblPop
 -- (pref_name  varchar(30),
 --  age_class  char(1),
@@ -744,6 +741,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO TblPop VALUES('千葉', '3', 'f', 900 );
 --
 -- /* 掛け算としての結合 */
+-- DROP TABLE IF EXISTS Items;
 -- CREATE TABLE Items
 --  (item_no INTEGER PRIMARY KEY,
 --   item    VARCHAR(32) NOT NULL);
@@ -753,6 +751,7 @@ FLUSH PRIVILEGES;
 -- INSERT INTO Items VALUES(30, 'MO');
 -- INSERT INTO Items VALUES(40, 'DVD');
 --
+-- DROP TABLE IF EXISTS SalesHistory;
 -- CREATE TABLE SalesHistory
 --  (sale_date DATE NOT NULL,
 --   item_no   INTEGER NOT NULL,
@@ -769,11 +768,13 @@ FLUSH PRIVILEGES;
 --
 --
 -- /* 完全外部結合 */
+-- DROP TABLE IF EXISTS Class_A;
 -- CREATE TABLE Class_A
 -- (id char(1),
 --  name varchar(30),
 --  PRIMARY KEY(id));
 --
+-- DROP TABLE IF EXISTS Class_B;
 -- CREATE TABLE Class_B
 -- (id   char(1),
 --  name varchar(30),
