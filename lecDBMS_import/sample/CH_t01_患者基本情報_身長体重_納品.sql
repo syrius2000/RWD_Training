@@ -1,1 +1,27 @@
-USE VACCINE ;DROP TABLE IF EXISTS 患者基本情報_身長体重;CREATE TABLE 患者基本情報_身長体重 (    PATIENTNO VARCHAR(20) NOT NULL,            -- 患者番号    SEX VARCHAR(1),                            -- 性別    HEIGHTWEIGHTSTATUS VARCHAR(2),             -- 身長体重ステータス    HEIGHTWEIGHT DECIMAL(5,2),                 -- 身長または体重（例: 156.7）    HEIGHTWEIGHTDATE DATE                      -- 身長体重測定日（日付のみ）    -- PRIMARY KEY (PATIENTNO, HEIGHTWEIGHTDATE)  -- 患者番号と日付の組み合わせを主キーに設定);LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_身長体重_納品.txt'  -- CSVファイルのフルパスを指定INTO TABLE 患者基本情報_身長体重                         -- データを挿入するテーブル名CHARACTER SET sjis                                 -- CSVファイルのエンコーディングをSJISに指定FIELDS TERMINATED BY ','                           -- 各フィールドがカンマで区切られているENCLOSED BY '"'                                    -- フィールドがダブルクォーテーションで囲まれている場合LINES TERMINATED BY '\r\n'                           -- 各行が改行コードで終わるIGNORE 1 ROWS                                      -- CSVのヘッダー行をスキップする場合(PATIENTNO, SEX, HEIGHTWEIGHTSTATUS, HEIGHTWEIGHT, @HEIGHTWEIGHTDATE_STR) -- 一時的に日付文字列を格納する変数SET HEIGHTWEIGHTDATE = STR_TO_DATE(@HEIGHTWEIGHTDATE_STR, '%Y/%m/%d %H:%i:%s'); -- 日付と時刻のフォーマットを指定select * from 患者基本情報_身長体重 limit 10;
+USE VACCINE;
+
+DROP TABLE IF EXISTS 患者基本情報_身長体重;
+CREATE TABLE 患者基本情報_身長体重 (
+    PATIENTNO VARCHAR(20) NOT NULL,            -- 患者番号
+    SEX VARCHAR(1),                            -- 性別
+    HEIGHTWEIGHTSTATUS VARCHAR(2),             -- 身長体重ステータス
+    HEIGHTWEIGHT DECIMAL(5,2),                 -- 身長または体重（例: 156.7）
+    HEIGHTWEIGHTDATE DATE                      -- 身長体重測定日（日付のみ）
+    -- PRIMARY KEY (PATIENTNO, HEIGHTWEIGHTDATE)  -- 患者番号と日付の組み合わせを主キーに設定
+);
+
+DESCRIBE 患者基本情報_身長体重;
+
+LOAD DATA LOCAL
+    -- INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_身長体重_納品.txt'
+    INFILE '/tmp/CH_t01_患者基本情報_身長体重_納品.txt'
+INTO TABLE 患者基本情報_身長体重                -- データを挿入するテーブル名
+    CHARACTER SET sjis                          -- CSVファイルのエンコーディングをSJISに指定
+    FIELDS TERMINATED BY ','                    -- 各フィールドがカンマで区切られている
+    ENCLOSED BY '"'                             -- フィールドがダブルクォーテーションで囲まれている場合
+    LINES TERMINATED BY '\r\n'                  -- 各行が改行コードで終わる
+    IGNORE 1 ROWS                               -- CSVのヘッダー行をスキップする場合
+(PATIENTNO, SEX, HEIGHTWEIGHTSTATUS, HEIGHTWEIGHT, @HEIGHTWEIGHTDATE_STR) -- 一時的に日付文字列を格納する変数
+SET HEIGHTWEIGHTDATE = STR_TO_DATE(@HEIGHTWEIGHTDATE_STR, '%Y/%m/%d %H:%i:%s'); -- 日付と時刻のフォーマットを指定
+
+SELECT * FROM 患者基本情報_身長体重 LIMIT 10;

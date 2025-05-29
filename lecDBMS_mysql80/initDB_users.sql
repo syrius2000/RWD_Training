@@ -8,26 +8,20 @@ CREATE DATABASE IF NOT EXISTS DWH ;
 CREATE DATABASE IF NOT EXISTS COVID ;
 CREATE DATABASE IF NOT EXISTS VACCIN ;
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'fuga';
-ALTER USER 'root'@'%' IDENTIFIED BY 'fuga';
-
-
+-- root grants
+-- ALTER USER 'root'@'localhost' IDENTIFIED BY 'fuga';
+-- GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 --
--- DROP  USER 'root'@'127.0.0.1';
--- CREATE USER IF NOT EXISTS 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
--- ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'fuga';
--- GRANT ALL ON *.* TO 'root'@'127.0.0.1';
+-- ALTER USER 'root'@'%' IDENTIFIED BY 'fuga';
+-- GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'         WITH GRANT OPTION;
+
 
 DROP  USER 'RWDadmin'@'%';
 CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'fugafuga';
 ALTER USER 'RWDadmin'@'%' IDENTIFIED BY 'fuga';
 GRANT ALL ON *.* TO 'root'@'%';
-
 FLUSH PRIVILEGES;
 
--- Define user account
-DROP USER IF EXISTS RWDadmin;
-DROP USER IF EXISTS RWDuser;
 
 -- DBに対するALLアクセスを設定 ------------------------------------------------
 -- Define user password
@@ -59,5 +53,5 @@ GRANT ALL ON COVID.* TO 'RWDuser'@'localhost';
 GRANT ALL ON VACCIN.*   TO 'RWDuser'@'%';
 
 
--- -- dont foget it !
+-- dont foget !
 FLUSH PRIVILEGES;

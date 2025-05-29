@@ -42,15 +42,13 @@ key_buffer_size=0
 
 # ファイル出力無制限
 secure-file-priv = ""
-
 ```
 
 ### MySQL Client setting exampe
 
-```mysql --verbose --help```  により判明する~/.my.cnfに適切なパーミッションを設定する。
-その前提にIDやPASSWORDを設定すると実務に便利です。
+```mysql --verbose --help```  により位置が判明される ```~/.my.cnf``` に適切なパーミッションを設定する。
 
-
+その前提に於いて、IDやPASSWORDを設定すると実務的に便利です。
 
 ```shell-session
 ## ~/.my.cnf
@@ -72,6 +70,13 @@ pager  = less -XFR
 # pager  = grcat ~/.grcat | less -XFR
 
 default-character-set = UTF8MB4
-
-
 ```
+
+よく理解して設定すれば良い。
+
+
+## ROOT の復活
+
+``` RecoverRootGrants.sql``` が参考になる。
+
+

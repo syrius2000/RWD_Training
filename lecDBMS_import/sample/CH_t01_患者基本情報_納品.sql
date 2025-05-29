@@ -1,1 +1,23 @@
-USE VACCINE ;DROP TABLE IF EXISTS 患者基本情報 ;CREATE TABLE 患者基本情報 (    PATIENTNO VARCHAR(20) PRIMARY KEY,    SEX VARCHAR(1),    BIRTHDAY DATE);LOAD DATA LOCAL    INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_納品.txt'  -- CSVファイルのフルパスを指定INTO TABLE 患者基本情報                        -- データを挿入するテーブル名    FIELDS TERMINATED BY ','                   -- 各フィールドがカンマで区切られている    ENCLOSED BY '"'                            -- フィールドがダブルクォーテーションで囲まれている場合    LINES TERMINATED BY '\n'                   -- 各行が改行コードで終わるIGNORE 1 ROWS                                  -- CSVのヘッダー行をスキップする場合(PATIENTNO, SEX, @BIRTHDAY_STR)                -- カラムの順序と、一時的に日付文字列を格納する変数SET BIRTHDAY = STR_TO_DATE(@BIRTHDAY_STR, '%Y%m%d'); -- 変数からDATE型に変換して'BIRTHDAY'カラムにセット
+USE VACCINE;
+
+DROP TABLE IF EXISTS 患者基本情報;
+CREATE TABLE 患者基本情報 (
+    PATIENTNO VARCHAR(20) NULL,
+    SEX VARCHAR(2),
+    BIRTHDAY DATE
+);
+
+DESCRIBE 患者基本情報;
+
+-- LOAD DATA LOCAL INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_納品.txt'
+LOAD DATA LOCAL INFILE '/tmp/CH_t01_患者基本情報_納品.txt'
+INTO TABLE 患者基本情報
+CHARACTER SET sjis
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS
+(PATIENTNO, SEX, @BIRTHDAY_STR)
+SET BIRTHDAY = STR_TO_DATE(@BIRTHDAY_STR, '%Y%m%d');
+
+select * from  患者基本情報 limit 10;

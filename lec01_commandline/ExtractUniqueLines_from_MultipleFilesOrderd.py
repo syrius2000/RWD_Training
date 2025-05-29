@@ -10,7 +10,6 @@
 """
 
 import sys
-import pprint
 
 def get_unique_lines_from_files_ordered(file_paths):
     """複数のファイルからユニークな行を抽出し、ファイルごとの元の順序を保持する関数"""
@@ -37,8 +36,8 @@ if __name__ == "__main__":
     unique_records = get_unique_lines_from_files_ordered(file_paths)
 
     if unique_records:
+    if unique_records:
         # print("\nユニークなレコード (ファイルごとの元の順序):")
         for record in unique_records:
-            pprint.pprint(record)
-
+            print(record)
 
