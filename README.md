@@ -4,7 +4,7 @@
 
 資料はGITHUBから得ることができる。
 
-git clone https://github.com/syrius2000/RWD_Training
+```git clone https://github.com/syrius2000/RWD_Training```
 
 この文書によりCUI、Linux（MAC OSX）でフラットテーブルデータを点検したり、Database化して解析テーブルを得るまでの下準備を完了させる事ができるような基礎的な知識の記録を目指す。
 
