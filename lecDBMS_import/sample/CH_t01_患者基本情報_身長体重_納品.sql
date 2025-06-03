@@ -10,6 +10,7 @@ CREATE TABLE 患者基本情報_身長体重 (
     -- PRIMARY KEY (PATIENTNO, HEIGHTWEIGHTDATE)  -- 患者番号と日付の組み合わせを主キーに設定
 );
 
+-- SHOW TABLES;
 DESCRIBE 患者基本情報_身長体重;
 
 LOAD DATA LOCAL

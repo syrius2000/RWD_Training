@@ -23,6 +23,7 @@ CREATE TABLE 処方薬剤 (
     -- PRIMARY KEY (PATIENTNO, STARTDATE, MEDICINECODE) -- 複合主キー
 );
 
+-- SHOW TABLES;
 DESCRIBE 処方薬剤;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t12_06_処方薬剤_納品.txt'

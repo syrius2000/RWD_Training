@@ -20,6 +20,9 @@ CREATE TABLE 一般検査(
     -- PRIMARY KEY (PATIENTNO, COLLECTDATE, COLLECTTIME, TESTITEMCODE)
 );
 
+-- SHOW TABLES;
+DESCRIBE 一般検査;
+
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t16_一般検査_2020_納品.txt' -- 1つ目のCSVファイルのフルパス
 LOAD DATA INFILE '/tmp/CH_t16_一般検査_2020_納品.txt' -- 1つ目のCSVファイルのフルパス
 INTO TABLE 一般検査

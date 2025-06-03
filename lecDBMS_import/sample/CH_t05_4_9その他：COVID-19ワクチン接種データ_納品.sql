@@ -37,6 +37,7 @@ CREATE TABLE COVID19ワクチン接種(
     -- PRIMARY KEY (PATIENTNO, EVENTDATE)             -- 患者番号とイベント日の組み合わせを主キーに設定
 );
 
+-- SHOW TABLES;
 DESCRIBE COVID19ワクチン接種;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t05_4_9その他：COVID-19ワクチン接種データ_納品.txt'

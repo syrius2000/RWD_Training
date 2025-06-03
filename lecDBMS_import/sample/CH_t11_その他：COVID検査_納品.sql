@@ -16,6 +16,7 @@ CREATE TABLE COVID検査 (
     -- PRIMARY KEY (PATIENTNO, COLLECTDATE, TESTITEMCODE) -- 複合主キー
 );
 
+-- SHOW TABLES;
 DESCRIBE COVID検査;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t11_その他：COVID検査_納品.txt'

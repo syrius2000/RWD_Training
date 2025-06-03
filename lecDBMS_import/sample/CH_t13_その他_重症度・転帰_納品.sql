@@ -1,7 +1,6 @@
 USE VACCINE;
 
 DROP TABLE IF EXISTS 重症度・転帰;
--- /Users/myamaguchi/Data/Vaccin/CH_t13_その他_重症度・転帰_納品.txt
 
 CREATE TABLE 重症度・転帰 (
     ADMISSIONNO VARCHAR(20) NOT NULL,          -- 入院番号
@@ -33,6 +32,9 @@ CREATE TABLE 重症度・転帰 (
     SHUYAKUKBN INT NULL                        -- 集約区分
     -- PRIMARY KEY (ADMISSIONNO)                  -- 入院番号を主キーに設定
 );
+
+-- SHOW TABLES;
+DESCRIBE 重症度・転帰;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t13_その他_重症度・転帰_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t13_その他_重症度・転帰_納品.txt'

@@ -17,6 +17,10 @@ CREATE TABLE 病名データ_カルテオーダ (
 
 -- "021799040","52","I05140","僧帽弁閉鎖不全症Ⅳ度","2021/12/16 0:00:00","","3","","0"
 --  Incorrect string value: '\x87W\x93x' for column 'DIAGNOSISDISEASE' at row 1186
+
+-- SHOW TABLES;
+DESCRIBE 病名データ_カルテオーダ;
+
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
 INTO TABLE 病名データ_カルテオーダ
@@ -43,4 +47,3 @@ SET
     VALIDENDDATE = STR_TO_DATE(NULLIF(@VALIDENDDATE_STR, ''), '%Y/%m/%d %H:%i:%s');
 
 select * from 病名データ_カルテオーダ limit 10;
-

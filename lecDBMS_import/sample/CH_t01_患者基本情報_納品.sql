@@ -7,6 +7,7 @@ CREATE TABLE 患者基本情報 (
     BIRTHDAY DATE
 );
 
+-- SHOW TABLES;
 DESCRIBE 患者基本情報;
 
 -- LOAD DATA LOCAL INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_納品.txt'

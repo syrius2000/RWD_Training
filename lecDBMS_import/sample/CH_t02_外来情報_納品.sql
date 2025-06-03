@@ -17,7 +17,7 @@ CREATE TABLE 外来情報 (
     ADMISSIONWARD VARCHAR(10)                    -- 入院病棟
 );
 
-SHOW TABLES;
+-- SHOW TABLES;
 DESCRIBE 外来情報;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t02_外来情報_納品.txt'
