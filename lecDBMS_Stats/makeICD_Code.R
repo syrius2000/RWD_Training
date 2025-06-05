@@ -36,6 +36,19 @@ FetchData <- function(query="show tables;") {
 #################################################################
 
 QuerySTR="
+use VACCINE;
+SELECT
+  COUNT(DISTINCT BYOMEICD) AS uniq_cnt_BYOMEICD
+--  ,COUNT(DISTINCT BYOMEI) AS uniq_cnt_BYOMEI
+FROM 病名データ_DPC;
 "
-
 FetchData(QuerySTR)
+
+# # +-------------------+-----------------+
+# # | uniq_cnt_BYOMEICD | uniq_cnt_BYOMEI |
+# # +-------------------+-----------------+
+# # |              3663 |            7328 |
+# # +-------------------+-----------------+
+# 1 row in set (0.47 sec)
+
+

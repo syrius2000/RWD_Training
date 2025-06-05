@@ -63,14 +63,94 @@ source("ListAllColumn.sql")
 
 res <- FetchData(query)
 
-FetchData("
-describe COVID検査
-")
+
+## {{{ 処方薬剤, Walface , medicin code
+query="
+SELECT
+ WELFARECODE
+,MEDICINENAME
+,COUNT(MEDICINENAME) as CNT
+FROM 処方薬剤
+GROUP BY
+ WELFARECODE
+,MEDICINENAME
+ORDER BY
+ WELFARECODE;
+"
+res <-FetchData(query)
+write.csv(res, file="Code処方薬剤WELFARE.csv")
+## }}}
 
 
-### ClinicalExam
-## dim(Dup.clinicalexam)
-## write.csv(Dup.clinicalexam, file="Dup.ClinicalExam.CSV")
+## {{{ 注射薬剤, Walface , medicin code
+query="
+SELECT
+ WELFARECODE
+,MEDICINENAME1
+,COUNT(MEDICINENAME1 ) as CNT
+FROM 注射薬剤
+GROUP BY
+ WELFARECODE
+,MEDICINENAME1
+ORDER BY
+ WELFARECODE;
+"
+res <-FetchData(query)
+write.csv(res, file="Code注射薬剤WELFARE1.csv")
+## }}}
+
+
+## {{{ {病名データ_カルテオーダ
+query="
+SELECT
+ DISEASECODE
+,DIAGNOSISDISEASE
+,COUNT(DISEASECODE) as CNT
+FROM 病名データ_カルテオーダ
+GROUP BY
+ DISEASECODE
+,DIAGNOSISDISEASE
+ORDER BY
+ DISEASECODE
+,DIAGNOSISDISEASE ;
+"
+res <-FetchData(query)
+write.csv(res, file="Code病名データ_カルテオーダ.csv")
+## }}}
+
+
+## {{{ 病名データ,
+query="
+SELECT
+ BYOMEICD
+,BYOMEI
+,COUNT(BYOMEICD) as CNT
+FROM 病名データ_DPC
+GROUP BY
+BYOMEICD
+,BYOMEI
+ORDER BY
+BYOMEICD
+,BYOMEI ;
+"
+res <-FetchData(query)
+write.csv(res, file="Code病名データ.csv")
+## }}}
+
+
+# ## {{{
+# query="
+# SELECT
+#
+# ,COUNT() as CNT
+# FROM
+# GROUP BY
+# ORDER BY
+#
+# ; "
+# res <-FetchData(query)
+# write.csv(res, file="Code.csv")
+# ## }}}
 
 
 
