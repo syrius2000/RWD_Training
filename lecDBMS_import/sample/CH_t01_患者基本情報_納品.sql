@@ -13,7 +13,7 @@ DESCRIBE 患者基本情報;
 -- LOAD DATA LOCAL INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_納品.txt'
 LOAD DATA LOCAL INFILE '/tmp/CH_t01_患者基本情報_納品.txt'
 INTO TABLE 患者基本情報
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

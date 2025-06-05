@@ -39,7 +39,7 @@ DESCRIBE 重症度・転帰;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t13_その他_重症度・転帰_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t13_その他_重症度・転帰_納品.txt'
 INTO TABLE 重症度・転帰
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

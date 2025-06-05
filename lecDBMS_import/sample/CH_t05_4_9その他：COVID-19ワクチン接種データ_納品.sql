@@ -43,7 +43,7 @@ DESCRIBE COVID19ワクチン接種;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t05_4_9その他：COVID-19ワクチン接種データ_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t05_4_9その他：COVID-19ワクチン接種データ_納品.txt'
 INTO TABLE COVID19ワクチン接種
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

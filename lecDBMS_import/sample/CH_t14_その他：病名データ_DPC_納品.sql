@@ -21,7 +21,7 @@ DESCRIBE 病名データ_DPC;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t14_その他：病名データ_DPC_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t14_その他：病名データ_DPC_納品.txt'
 INTO TABLE 病名データ_DPC
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

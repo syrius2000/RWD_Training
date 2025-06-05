@@ -17,7 +17,7 @@ LOAD DATA LOCAL
     -- INFILE '/Users/myamaguchi/Data/Vaccin/CH_t01_患者基本情報_身長体重_納品.txt'
     INFILE '/tmp/CH_t01_患者基本情報_身長体重_納品.txt'
 INTO TABLE 患者基本情報_身長体重                -- データを挿入するテーブル名
-    CHARACTER SET sjis                          -- CSVファイルのエンコーディングをSJISに指定
+    CHARACTER SET CP932                         -- CSVファイルのエンコーディングをCP932に指定
     FIELDS TERMINATED BY ','                    -- 各フィールドがカンマで区切られている
     ENCLOSED BY '"'                             -- フィールドがダブルクォーテーションで囲まれている場合
     LINES TERMINATED BY '\r\n'                  -- 各行が改行コードで終わる

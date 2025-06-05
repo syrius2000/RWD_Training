@@ -29,7 +29,7 @@ DESCRIBE 入院情報;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t02_入院情報_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t02_入院情報_納品.txt'
 INTO TABLE 入院情報
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

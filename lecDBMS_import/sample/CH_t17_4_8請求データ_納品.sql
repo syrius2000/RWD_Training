@@ -26,7 +26,7 @@ DESCRIBE 請求データ;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t17_4_8請求データ_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t17_4_8請求データ_納品.txt'
 INTO TABLE 請求データ
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

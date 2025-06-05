@@ -24,7 +24,7 @@ DESCRIBE 病名データ_カルテオーダ;
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
 INTO TABLE 病名データ_カルテオーダ
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'

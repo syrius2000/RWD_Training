@@ -11,7 +11,7 @@ CREATE TABLE 注射薬剤 (
     ROUTECODE VARCHAR(10),                     -- 経路コード
     ROUTENAME VARCHAR(100),                    -- 経路名
     TIMES INT,                                 -- 回数
-    MEDICINECODE VARCHAR(20),                  -- 医薬品コード
+    WELFARECODE VARCHAR(20),                   -- 医薬品コード
     MEDICINENAME1 VARCHAR(100),                -- 医薬品名1
     QUANTITY DECIMAL(10,2),                    -- 数量
     SELECTEDUNIT VARCHAR(10),                  -- 選択単位
@@ -21,14 +21,12 @@ CREATE TABLE 注射薬剤 (
     UNIT2 VARCHAR(10),                         -- 単位2
     QUANTITY3 DECIMAL(10,2),                   -- 数量3
     UNIT3 VARCHAR(10)                          -- 単位3
-    -- PRIMARY KEY (PATIENTNO, STARTDATE, MEDICINECODE) -- 複合主キー
 );
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t12_07_注射薬剤_納品.txt'
-
 LOAD DATA INFILE '/tmp/CH_t12_07_注射薬剤_納品.txt'
 INTO TABLE 注射薬剤
-CHARACTER SET sjis
+CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
