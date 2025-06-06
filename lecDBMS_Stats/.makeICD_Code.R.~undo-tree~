@@ -1,0 +1,21 @@
+(undo-tree-save-format-version . 1)
+"bf84600ccede2fe288518838d150bd7b6809c598"
+[nil nil nil nil (26690 33009 65005 842000) 0 nil]
+([nil nil ((#("readChar(file)" 0 14 (fontified t)) . 1928) (t 26690 30483 252974 915000)) nil (26690 33009 65003 572000) 0 nil])
+([nil nil ((nil rear-nonsticky nil 1941 . 1942) (nil fontified nil 1928 . 1942) (1928 . 1942)) nil (26690 33009 65001 562000) 0 nil])
+([nil nil ((1941 . 1942)) nil (26690 33009 64999 929000) 0 nil])
+([nil nil ((1942 . 1963)) nil (26690 33009 64998 721000) 0 nil])
+([nil nil ((#("file.info(file)$size)" 0 20 (fontified t) 20 21 (fontified t rear-nonsticky t)) . 1943) (undo-tree-id5 . -21) (undo-tree-id6 . -21)) nil (26690 33009 64997 384000) 0 nil])
+([nil nil ((nil fontified nil 1963 . 1964) (nil fontified nil 1943 . 1963) (1943 . 1964)) nil (26690 33009 64993 302000) 0 nil])
+([nil nil ((#("\"UniqAllColumn.sql\"" 0 19 (fontified t face font-lock-string-face)) . 1895)) nil (26690 33009 64991 489000) 0 nil])
+([nil nil ((nil rear-nonsticky nil 1913 . 1914) (nil fontified nil 1895 . 1914) (1895 . 1914)) nil (26690 33009 64990 209000) 0 nil])
+([nil nil ((#("file <- \"UniqAllColumn.sql\"
+" 0 5 (fontified t) 5 7 (fontified t face ess-assignment-face) 7 8 (fontified t) 8 26 (fontified t face font-lock-string-face) 26 27 (fontified t rear-nonsticky t face font-lock-string-face) 27 28 (fontified t)) . 1887) (undo-tree-id4 . -8)) nil (26690 33009 64988 395000) 0 nil])
+([nil nil ((nil rear-nonsticky nil 1914 . 1915) (nil fontified nil 1914 . 1915) (nil fontified nil 1913 . 1914) (nil fontified nil 1895 . 1913) (nil fontified nil 1894 . 1895) (nil fontified nil 1892 . 1894) (nil fontified nil 1887 . 1892) (1887 . 1915)) nil (26690 33009 64985 642000) 0 nil])
+([nil nil ((#("readChar(file, file.info(file)$size)" 0 13 (fontified t) 13 15 (fontified t) 15 35 (fontified t) 35 36 (rear-nonsticky t fontified t)) . 1928) (undo-tree-id2 . -15) (undo-tree-id3 . -15)) nil (26690 33009 64981 934000) 0 nil])
+([nil nil ((nil fontified nil 1963 . 1964) (nil fontified nil 1943 . 1963) (nil fontified nil 1941 . 1943) (nil fontified nil 1928 . 1941) (1928 . 1964)) nil (26690 33009 64976 573000) 0 nil])
+([nil nil ((#("
+
+" 0 2 (fontified t)) . 2213) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 1966) nil (26690 33009 64969 504000) 0 nil])
+([nil current ((1966 . 1967) (t 26690 33009 195470 246000)) nil (26690 33013 824492 656000) 0 nil])
+nil
