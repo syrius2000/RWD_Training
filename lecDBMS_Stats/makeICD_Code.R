@@ -18,6 +18,7 @@ library(quietly=T, "tidyverse");
 
 ############
 FetchData <- function(query="show tables;") {
+    .resultDF <<- NULL
   con <- dbConnect(RMySQL::MySQL(),
                    host= "localhost",
                    ##host= "IMAC-5B1067.local",
@@ -26,23 +27,36 @@ FetchData <- function(query="show tables;") {
                    dbname ="VACCINE"
   )
   ##
-  res <- dbSendQuery(con, query)
-  df <- dbFetch(res, n=-1)   # dont forget n=-1
-  dbClearResult(res)
-  ## ## RDBMSと接続を切る
-  dbDisconnect(con)
+  time_result = system.time({
+      message("SQLクエリを実行し、結果を取得しています...")
+      ## dbGetQueryはクエリを実行し、結果全体をデータフレームとして返します
+      df <- dbGetQuery(con, query)
+      message("クエリの実行が完了しました。")
+      ## RDBMSと接続を切る
+      if (!is.null(con) && dbIsValid(con)) {
+          dbDisconnect(con)
+          message("データベース接続を閉じました。")
+      }
+  })
+  ## 経過時間だけを取り出す
+  cat("経過時間 (elapsed):", time_result["elapsed"], "秒\n")
+  ## print(df, 5)
+  .resultDF <<- df
   return(df)
 } ## FetchData()
 #################################################################
 
+res <- FetchData()
+res
+
 QuerySTR="
-use VACCINE;
 SELECT
   COUNT(DISTINCT BYOMEICD) AS uniq_cnt_BYOMEICD
---  ,COUNT(DISTINCT BYOMEI) AS uniq_cnt_BYOMEI
+ ,COUNT(DISTINCT BYOMEI)   AS uniq_cnt_BYOMEI
 FROM 病名データ_DPC;
 "
-FetchData(QuerySTR)
+res <- FetchData(QuerySTR)
+.resultDF
 
 # # +-------------------+-----------------+
 # # | uniq_cnt_BYOMEICD | uniq_cnt_BYOMEI |
@@ -50,5 +64,3 @@ FetchData(QuerySTR)
 # # |              3663 |            7328 |
 # # +-------------------+-----------------+
 # 1 row in set (0.47 sec)
-
-

@@ -58,101 +58,166 @@ FetchData <- function(query="show tables;") {
   # 17 +-------------------------+
 
 
-setwd("/Users/myamaguchi/Documents/RWD_import/00Presentation/20250228/RWD_Training/lecDBMS_Stats/")
 source("ListAllColumn.sql")
 
-res <- FetchData(query)
+FetchData(query="describe ClinicalExam;")
 
+FetchData()
 
-## {{{ 処方薬剤, Walface , medicin code
-query="
-SELECT
- WELFARECODE
-,MEDICINENAME
-,COUNT(MEDICINENAME) as CNT
-FROM 処方薬剤
-GROUP BY
- WELFARECODE
-,MEDICINENAME
-ORDER BY
- WELFARECODE;
+## Addressに重複なし
+
+### ClinicalExam
+FetchData(query="describe ClinicalExam;")
+
+Qstr="
+SELECT * FROM (
+  SELECT count(VAR) as CNT,
+    VAR ,YR ,PTID ,HospitalIn ,HospitalOut ,ExamDate ,ExamOrder ,ExamName ,ExamValue
+  FROM ClinicalExam
+  GROUP BY
+    VAR ,YR ,PTID ,HospitalIn ,HospitalOut ,ExamDate ,ExamOrder ,ExamName ,ExamValue
+  ) t
+WHERE t.CNT > 1;
 "
-res <-FetchData(query)
-write.csv(res, file="Code処方薬剤WELFARE.csv")
-## }}}
+##
+##
+##
+Dup.clinicalexam <- FetchData(query=Qstr)
+dim(Dup.clinicalexam)
+write.csv(Dup.clinicalexam, file="Dup.ClinicalExam.CSV")
 
 
-## {{{ 注射薬剤, Walface , medicin code
-query="
-SELECT
- WELFARECODE
-,MEDICINENAME1
-,COUNT(MEDICINENAME1 ) as CNT
-FROM 注射薬剤
-GROUP BY
- WELFARECODE
-,MEDICINENAME1
-ORDER BY
- WELFARECODE;
+### DrugDS
+Qstr="
+SELECT * FROM (
+  SELECT count(VAR) as CNT,
+    VAR ,PTID ,Kubun ,OrderNO ,Department ,DoseStartDate ,DoseEndDate ,DrugCODE ,DrugName ,YJCode ,Dose ,Unit ,DoseRoute ,DoseComment1 ,DoseComment2
+  FROM DrugDS
+  GROUP BY
+    VAR ,PTID ,Kubun ,OrderNO ,Department ,DoseStartDate ,DoseEndDate ,DrugCODE ,DrugName ,YJCode ,Dose ,Unit ,DoseRoute ,DoseComment1 ,DoseComment2
+  ) t
+WHERE t.CNT > 1;
 "
-res <-FetchData(query)
-write.csv(res, file="Code注射薬剤WELFARE1.csv")
-## }}}
+## 2234 重複
+## 2234 rows in set
+## Time: 241.594s
+Dup.DrugDS <- FetchData(query=Qstr)
+write.csv(Dup.DrugDS, file="Dup.DrugDS.CSV")
 
 
-## {{{ {病名データ_カルテオーダ
-query="
-SELECT
- DISEASECODE
-,DIAGNOSISDISEASE
-,COUNT(DISEASECODE) as CNT
-FROM 病名データ_カルテオーダ
-GROUP BY
- DISEASECODE
-,DIAGNOSISDISEASE
-ORDER BY
- DISEASECODE
-,DIAGNOSISDISEASE ;
+### DrugIV
+Qstr="
+SELECT * FROM (
+    SELECT count(VAR) AS CNT,
+VAR ,PTID ,Kubun ,OrderNO ,DrugCode ,YJCode ,DrugName ,DoseStartDate ,Department ,Dose ,Unit ,DoseRoute ,DoseTimes ,DosageName
+    FROM DrugIV
+    GROUP BY
+VAR ,PTID ,Kubun ,OrderNO ,DrugCode ,YJCode ,DrugName ,DoseStartDate ,Department ,Dose ,Unit ,DoseRoute ,DoseTimes ,DosageName
+    ) t
+WHERE t.CNT > 1;
 "
-res <-FetchData(query)
-write.csv(res, file="Code病名データ_カルテオーダ.csv")
-## }}}
+##
+##
+##
+Dup.DrugIV <- FetchData(query=Qstr)
+dim(Dup.DrugIV)
+## [1] 238107     15
+write.csv(Dup.DrugIV, file="Dup.DrugIV.CSV")
 
-
-## {{{ 病名データ,
-query="
-SELECT
- BYOMEICD
-,BYOMEI
-,COUNT(BYOMEICD) as CNT
-FROM 病名データ_DPC
-GROUP BY
-BYOMEICD
-,BYOMEI
-ORDER BY
-BYOMEICD
-,BYOMEI ;
+### Inpatient
+Qstr="
+SELECT * FROM (
+    SELECT count(VAR) as CNT,
+VAR ,PTID ,Sex ,Birthday ,HospitalCode ,HospitalIn ,HospitalOut ,HospitalCat ,DPCName ,ICD10 ,DiagDate ,ClinicInCode ,ClinicInName ,ClinicOutCode ,ClinicOutName
+    FROM Inpatient
+    GROUP BY
+VAR ,PTID ,Sex ,Birthday ,HospitalCode ,HospitalIn ,HospitalOut ,HospitalCat ,DPCName ,ICD10 ,DiagDate ,ClinicInCode ,ClinicInName ,ClinicOutCode ,ClinicOutName
+    ) t
+WHERE t.CNT > 1;
 "
-res <-FetchData(query)
-write.csv(res, file="Code病名データ.csv")
-## }}}
+##
+##
+Dup.Inpatient <- FetchData(query=Qstr)
+dim(Dup.Inpatient)
+write.csv(Dup.Inpatient, file="Dup.Inpatient.CSV")
 
 
-# ## {{{
-# query="
-# SELECT
-#
-# ,COUNT() as CNT
-# FROM
-# GROUP BY
-# ORDER BY
-#
-# ; "
-# res <-FetchData(query)
-# write.csv(res, file="Code.csv")
-# ## }}}
+### Outpatient
+Qstr="
+SELECT * FROM (
+    SELECT count(VAR) as CNT,
+        VAR ,PTID ,AppointmentDate ,Birthday ,Sex ,ClinicInCode
+    FROM Outpatient
+    GROUP BY
+    VAR ,PTID ,AppointmentDate ,Birthday ,Sex ,ClinicInCode
+    ) t
+WHERE t.CNT > 1;
+"
+##
+##
+Dup.Outpatient <- FetchData(query=Qstr)
+dim(Dup.Outpatient)
+write.csv(Dup.Outpatient, file="Dup.Outpatient.CSV")
 
 
+### Rezept
+Qstr="
+SELECT * FROM (
+    SELECT count(VAR) as CNT,
+        VAR ,PTID ,Sex ,Birthday ,DiseaseCode ,DiseaseName ,DateDiag ,DateRemission
+    FROM Rezept
+    GROUP BY
+        VAR ,PTID ,Sex ,Birthday ,DiseaseCode ,DiseaseName ,DateDiag ,DateRemission
+    ) t
+WHERE t.CNT > 1;
+"
+##
+##
+Dup.Rezept <- FetchData(query=Qstr)
+dim(Dup.Rezept)
+write.csv(Dup.Rezept, file="Dup.Rezept.CSV")
+
+
+### Vital
+Qstr="
+SELECT * FROM (
+  SELECT count(VAR) as CNT,
+    var ,yr ,ptid ,hospitalcode ,hospitalin ,hospitalout ,measurementdate ,measurementtime ,vitalsigns ,vitalresult
+  FROM Vital
+  GROUP BY
+    VAR ,YR ,PTID ,HospitalCode ,HospitalIn ,HospitalOut ,measurementDate ,measurementTime ,VitalSigns ,VitalResult
+    ) t
+WHERE t.CNT > 1;
+"
+##
+##
+Dup.Vital <- FetchData(query=Qstr)
+dim(Dup.Vital)
+write.csv(Dup.Vital, file="Dup.Vital.CSV")
+
+## summary 重複ファイルのSummary
+# % for i in *.CSV;do echo $i,"\t";wc $i;done
+## Dup.ClinicalExam.CSV,
+##     2235    2349  239529 Dup.ClinicalExam.CSV
+## Dup.DrugDS.CSV,
+##    47112  205925 10606748 Dup.DrugDS.CSV
+## Dup.DrugIV.CSV,
+##   238108  903503 54935396 Dup.DrugIV.CSV
+## Dup.Inpatient.CSV,
+##    17079  136559 3648906 Dup.Inpatient.CSV
+## Dup.Outpatient.CSV,
+##      881    2297   73562 Dup.Outpatient.CSV
+## Dup.Rezept.CSV,
+##        1       1      94 Dup.Rezept.CSV
+## Dup.Vital.CSV,
+##    14782   44344 2102011 Dup.Vital.CSV
+
+print(dim(Dup.clinicalexam))
+print(dim(Dup.DrugIV))
+print(dim(Dup.Inpatient))
+print(dim(Dup.Outpatient))
+print(dim(Dup.Rezept))
+print(dim(Dup.Vital))
 
 ## Local Variables:
 ## fill-column   : 88
