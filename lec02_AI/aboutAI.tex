@@ -1,0 +1,120 @@
+% -*- coding:utf-8 -*-
+\documentclass[uplatex,dvipdfmx,9pt,a4paper,cjk]{beamer}
+\usepackage[utf8]{inputenc}                     % ギリシャ文字など入力
+\usepackage[T1]{fontenc}                        % ギリシャ文字など出力
+\usepackage{newtxtext,newtxmath}                % times font
+\usepackage{amsmath,amscd,amsxtra,bm}           % bm is ams recommend, math bold font
+\usepackage{mathtools}                          % 参照された数式だけ、（１）が付与
+\mathtoolsset{showonlyrefs=true}                % 参照された数式だけ、（１）が付与
+\usepackage[jis2004,deluxe,expert,uplatex]{otf} % 日本語多ウェイト化
+% \renewcommand{\kanjifamilydefault}{\gtdefault}  % 日本語をヒラギノ角ゴシック
+% \renewcommand{\familydefault}{\sfdefault}       % 英文をサンセリフ体に
+\mathversion{bold}                              % 数式フォント太字
+\usepackage{here}                               % H が使える
+\usepackage{booktabs}                           % 表の\midrule などがつかえる
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[backend=biber]{biblatex}            % bibliography
+\addbibresource{Ikeda.bib}                      % default database file
+\usepackage{bxdpx-beamer}                       % dvipdfmxでナビゲーションシンボルを機能させる
+\usepackage{pxjahyper}                          % しおりの文字化け対策
+%%%% "~" がコマンドエラーになるのを防ぐ
+%% http://tex.stackexchange.com/questions/66949/command-nobreakspace-unavailable-when-switching-to-t1-encoding-under-xelatex
+\usepackage{xpatch}
+\renewcommand{\ttdefault}{ul9}
+\xpatchcmd{\ttfamily}{\selectfont}{\fontencoding{T1}\selectfont}{}{}
+\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Madrid}
+% \usecolortheme{whale}               % 青基調で背景あり
+% \usecolortheme{seagull}             %
+% \usecolortheme{goeagles}            % ★金と茶のトーン
+\usecolortheme{seahorse}            %  淡い青のモノトーン
+\usefonttheme{professionalfonts}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{bibliography item}[number]   % 文献は「番号形式」
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{navigation symbols}{}        % ナビゲーションバー非表示
+\setbeamertemplate{footline}[frame number]      % フッターをスライド番号だけに
+\AtBeginSection[]{                              %セクションごとに自動で栞生成
+    \begin{frame}
+        \frametitle{CURRENT section}
+        \tableofcontents[currentsection]
+    \end{frame}}
+%
+\DeclareSymbolFont{operators}{OT1}{\sfdefault}{m}{n}
+\SetSymbolFont{operators}{bold}{OT1}{\sfdefault}{b}{n}
+\usefonttheme{structurebold} % タイトル部を太字
+\setbeamerfont{alerted text}{series=\bfseries}  % Alertを太字
+\setbeamerfont{section in toc}{series=\mdseries}% 目次は太字にしない
+\setbeamerfont{frametitle}{size=\Large}         % フレームタイトル文字サイズ
+\setbeamerfont{title}{size=\LARGE}              % タイトル文字サイズ
+\setbeamerfont{date}{size=\small}               % 日付文字サイズ
+\setbeamerfont{bibliography item}{size=\footnotesize}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
+\usepackage{pxjahyper}  % PDF目次文字化け回避(platexでは不要)hyperrefの後でload
+%%% {Sweave}
+\usepackage{Sweave}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+\fvset{listparameters={\setlength{\topsep}{0pt}}}
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\fvset{xleftmargin=2zw,baselinestretch=0.75}
+\setkeys{Gin}{width=0.68\textwidth}
+
+\begin{document}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \title{おやじ流AI利活用事例}
+  \subtitle{AI利用のコツ、出力結果利用場面での注意点。複数AI利用のススメ}
+  \author{山口 学}
+  \institute{}
+  \date[]{2021-08-30(Mon)}
+  \maketitle
+\end{frame}
+
+\section{2024年から発展したAI}
+
+frame
+
+
+
+
+\appendix{}
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{保健所の用語}
+
+  \begin{description}
+    \item[発生届] コロナ感染は特定疾患Ⅳ類に該当し、報告の義務がある。その様式のこと
+    \item[HER-SYS] コロナ感染者の情報を把握・管理するシステム
+    \item[G-SYS] コロナ感染者の情報を集計し、自治体等に報告するエクセルw
+    \item[疫学調査] 薬業でのそれは、「集団の効果量を測定すること」であるが、保健所では感染者の状況・現状を調査することをいう。
+    \item[前期疫学調査] クラスターの発生状況を調査し、感染拡大を管理すること
+    \item[後期疫学調査] 前期が回らなくなったので、感染者の情報を把握・管理すること
+  \end{description}
+
+  当初の期待「疫学の後方支援」は用語が異なり、意味が違い断念。支援業務最中の
+  データを頭・メモして支援業務最中に現状を把握することとした。
+
+\end{frame}
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{参照情報・補遺}
+  \label{sec:addendum}
+
+  \scriptsize
+  \beamertemplatetextbibitems
+  \printbibliography[title=参考情報]
+
+\end{frame}
+
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [containsverbatim] for using verbatim environment and \verb command.
+% [allowframebreaks] for automatic split of frames if the contents do not fit in a single slide.
+% [shrink]  for shrinking the contents to fit in a single slide.
+% [squeeze] for squeezing vertical space.
+% [fragile] for verbatim (new `16/09/06
+% let g:Tex_FoldedEnvironments = 'verbatim,comment,frame,thebibliography,keywords,abstract,titlepage'
+
