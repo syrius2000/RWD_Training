@@ -36,7 +36,6 @@ sort ClinicalExamSampleNotSorted.csv | uniq | wc
 
 ![重複が複数不連続](/IMAGE/ClinicalExamSampleNotSorted.png)
 
-
 awkやpythonなど「連想配列」機能がある言語を注意して利用すれば良い。
 
 see DUP.awk, DUP.py

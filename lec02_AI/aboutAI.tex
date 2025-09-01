@@ -1,4 +1,3 @@
-% -*- coding:utf-8 -*-
 \documentclass[uplatex,dvipdfmx,9pt,a4paper,cjk]{beamer}
 \usepackage[utf8]{inputenc}                     % ギリシャ文字など入力
 \usepackage[T1]{fontenc}                        % ギリシャ文字など出力
@@ -9,12 +8,15 @@
 \usepackage[jis2004,deluxe,expert,uplatex]{otf} % 日本語多ウェイト化
 % \renewcommand{\kanjifamilydefault}{\gtdefault}  % 日本語をヒラギノ角ゴシック
 % \renewcommand{\familydefault}{\sfdefault}       % 英文をサンセリフ体に
+% フォントの警告を抑制するために追加
+\DeclareFontShape{JY2}{hmc}{b}{n}{<->ssub*hmc/bx/n}{}
 \mathversion{bold}                              % 数式フォント太字
 \usepackage{here}                               % H が使える
 \usepackage{booktabs}                           % 表の\midrule などがつかえる
+\usepackage{moresize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[backend=biber]{biblatex}            % bibliography
-\addbibresource{Ikeda.bib}                      % default database file
+% \usepackage[backend=biber]{biblatex}            % bibliography
+% \addbibresource{Ikeda.bib}                      % default database file
 \usepackage{bxdpx-beamer}                       % dvipdfmxでナビゲーションシンボルを機能させる
 \usepackage{pxjahyper}                          % しおりの文字化け対策
 %%%% "~" がコマンドエラーになるのを防ぐ
@@ -54,16 +56,47 @@
 \setbeamerfont{bibliography entry title}{size=\footnotesize}
 \setbeamerfont{bibliography entry location}{size=\footnotesize}
 \setbeamerfont{bibliography entry note}{size=\footnotesize}
-\usepackage{pxjahyper}  % PDF目次文字化け回避(platexでは不要)hyperrefの後でload
 %%% {Sweave}
-\usepackage{Sweave}
-\DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=2em}
-\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
-\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
-\fvset{listparameters={\setlength{\topsep}{0pt}}}
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
-\fvset{xleftmargin=2zw,baselinestretch=0.75}
-\setkeys{Gin}{width=0.68\textwidth}
+% \usepackage{Sweave}
+% \DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=2em}
+% \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+% \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+% \fvset{listparameters={\setlength{\topsep}{0pt}}}
+% \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+% \fvset{xleftmargin=2zw,baselinestretch=0.75}
+% \setkeys{Gin}{width=0.68\textwidth}
+
+% --- tcolorbox (会話風ボックス) の設定 ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% 会話ボックスの共通スタイル
+\tcbset{
+  chatstyle/.style={
+    boxrule=0.5pt,
+    arc=4mm,
+    fonttitle=\bfseries,
+    fontupper=\small, % ボックス内のフォントサイズをsmallに
+    breakable,
+  }
+}
+
+% 質問者（You）側の会話ボックス
+\newtcolorbox{mychat}{
+  chatstyle,
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  title={You},
+}
+
+% AI（Gemini）側の会話ボックス
+\newtcolorbox{aichat}{
+  chatstyle,
+  colback=green!5!white,
+  colframe=green!65!black,
+  title={Gemini},
+}
+% --- tcolorbox (会話風ボックス) の設定 END ---
 
 \begin{document}
 
@@ -76,30 +109,63 @@
   \maketitle
 \end{frame}
 
-\section{2024年から発展したAI}
+\section{お親父流のAI関係用語}
 
-frame
+\section{お親父流のAI利用事例}
 
+\begin{frame}[fragile]{AIとの会話サンプル}
 
+  % --- 質問者の発言 ---
+  \begin{mychat}
+    利用DBとしてMySQL8.0を用いる。
+    あるテーブルのあるカラムに対し、次の文字列を含むとき"1"、含まないとき"0"を出力するCASE文を作りたい。
 
+    対象の文字列は以下の通り（先頭が一致すれば良い）：
+    \begin{itemize}
+        \item C00-C26, C30-C34, C37-C41
+        \item C43-C58, C60-C85, C88, C90-C96
+        \item D03, D46, Z85
+    \end{itemize}
+    特に、C00-C26の範囲は、`C00\%`, `C01\%`, ..., `C26\%` のように判定してほしい。
+  \end{mychat}
 
-\appendix{}
-\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \frametitle{保健所の用語}
-
-  \begin{description}
-    \item[発生届] コロナ感染は特定疾患Ⅳ類に該当し、報告の義務がある。その様式のこと
-    \item[HER-SYS] コロナ感染者の情報を把握・管理するシステム
-    \item[G-SYS] コロナ感染者の情報を集計し、自治体等に報告するエクセルw
-    \item[疫学調査] 薬業でのそれは、「集団の効果量を測定すること」であるが、保健所では感染者の状況・現状を調査することをいう。
-    \item[前期疫学調査] クラスターの発生状況を調査し、感染拡大を管理すること
-    \item[後期疫学調査] 前期が回らなくなったので、感染者の情報を把握・管理すること
-  \end{description}
-
-  当初の期待「疫学の後方支援」は用語が異なり、意味が違い断念。支援業務最中の
-  データを頭・メモして支援業務最中に現状を把握することとした。
+  % --- AIの回答 ---
+  \begin{aichat}
+    \begin{scriptsize}
+    \begin{verbatim}
+SELECT
+  your_column,
+  CASE
+    WHEN your_column REGEXP '^ (C(0[0-9]|1[0-9]|2[0-6]|3[0-4]|3[7-9]|4[0-1]|4[3-9]|5[0-8]|6[0-9]|7[0-9]|8[0-5]|88|9[0-6])|D(03|46)|Z85)'
+    THEN 1
+    ELSE 0
+  END AS result_flag
+FROM
+    your_table;
+    \end{verbatim}
+  \end{scriptsize}
+  \end{aichat}
 
 \end{frame}
+
+
+% \appendix{}
+% \begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   \frametitle{保健所の用語}
+
+%   \begin{description}
+%     \item[発生届] コロナ感染は特定疾患Ⅳ類に該当し、報告の義務がある。その様式のこと
+%     \item[HER-SYS] コロナ感染者の情報を把握・管理するシステム
+%     \item[G-SYS] コロナ感染者の情報を集計し、自治体等に報告するエクセルw
+%     \item[疫学調査] 薬業でのそれは、「集団の効果量を測定すること」であるが、保健所では感染者の状況・現状を調査することをいう。
+%     \item[前期疫学調査] クラスターの発生状況を調査し、感染拡大を管理すること
+%     \item[後期疫学調査] 前期が回らなくなったので、感染者の情報を把握・管理すること
+%   \end{description}
+
+%   当初の期待「疫学の後方支援」は用語が異なり、意味が違い断念。支援業務最中の
+%   データを頭・メモして支援業務最中に現状を把握することとした。
+
+% \end{frame}
 \begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \frametitle{参照情報・補遺}
   \label{sec:addendum}
