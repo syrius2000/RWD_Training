@@ -1,7 +1,6 @@
 .DS_Store
 .Rhistory
 *.aux
-*.aux
 *.bcf
 *.dot
 *.dvi
@@ -14,3 +13,4 @@
 *.snm
 *.synctex.gz
 *.toc
+*.vrb
