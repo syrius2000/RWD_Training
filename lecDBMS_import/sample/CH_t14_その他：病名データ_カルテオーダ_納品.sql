@@ -23,7 +23,8 @@ DESCRIBE 病名データ_カルテオーダ;
 
 -- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
 LOAD DATA INFILE '/tmp/CH_t14_その他：病名データ_カルテオーダ_納品.txt'
-INTO TABLE 病名データ_カルテオーダ
+IGNORE -- エラーが発生した行をスキップして処理を続行する
+INTO TABLE 病名データ_カルテオーダ -- テーブルのデフォルト文字コードをutf8mb4に設定することを推奨
 CHARACTER SET CP932
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -33,17 +34,21 @@ IGNORE 1 ROWS
     PATIENTNO,
     DEPARTMENTCODE,
     DISEASECODE,
-    DIAGNOSISDISEASE,
+    @DIAGNOSISDISEASE,   -- 一時変数に読み込む
     @VALIDSTARTDATE_STR, -- 一時変数に読み込む
     @VALIDENDDATE_STR,   -- 一時変数に読み込む
-    MAINDISEASESTATUS,
-    FINISHSTATUS,
-    DIAGNOSISSTATUS
+    @MAINDISEASESTATUS,  -- 一時変数に読み込む
+    @FINISHSTATUS,       -- 一時変数に読み込む
+    @DIAGNOSISSTATUS     -- 一時変数に読み込む
 )
 SET
-    -- VALIDSTARTDATE カラムの処理: 空文字列の場合NULLに変換
-    VALIDSTARTDATE = STR_TO_DATE(NULLIF(@VALIDSTARTDATE_STR, ''), '%Y/%m/%d %H:%i:%s'),
-    -- VALIDENDDATE カラムの処理: 空文字列の場合NULLに変換
-    VALIDENDDATE = STR_TO_DATE(NULLIF(@VALIDENDDATE_STR, ''), '%Y/%m/%d %H:%i:%s');
+    -- 各カラムで空文字列をNULLに変換し、データの一貫性を保つ
+    DIAGNOSISDISEASE = NULLIF(TRIM(@DIAGNOSISDISEASE), ''),
+    MAINDISEASESTATUS = NULLIF(TRIM(@MAINDISEASESTATUS), ''),
+    FINISHSTATUS = NULLIF(TRIM(@FINISHSTATUS), ''),
+    DIAGNOSISSTATUS = NULLIF(TRIM(@DIAGNOSISSTATUS), ''),
+    -- 日付変換: 空文字列や不正なフォーマットの場合にエラーとせずNULLを設定する
+    VALIDSTARTDATE = STR_TO_DATE(NULLIF(TRIM(@VALIDSTARTDATE_STR), ''), '%Y/%m/%d %H:%i:%s'),
+    VALIDENDDATE = STR_TO_DATE(NULLIF(TRIM(@VALIDENDDATE_STR), ''), '%Y/%m/%d %H:%i:%s');
 
 select * from 病名データ_カルテオーダ limit 10;
