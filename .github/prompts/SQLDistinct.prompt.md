@@ -1,5 +1,5 @@
 ---
-title: "TABLEの重複削除
+title: "TABLEの重複削除"
 description: "テーブルの重複行を削除するSQLを生成します。"
 mode: agent
 ---
@@ -16,8 +16,6 @@ mode: agent
 ### 要件:
 1.  **データベース名**: `VACCINE`
 2.  **テーブル名**: `myTableName` もしくはセレクトされれたテーブルァイルを利用する
-
-
 
 ### 対象のテーブル名
 ```
