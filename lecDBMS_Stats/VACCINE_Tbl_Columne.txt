@@ -1,0 +1,180 @@
+COVID19ワクチン接種	PATIENTNO	1	varchar	20				varchar(20)	NO
+COVID19ワクチン接種	DEPARTMENTCODE	2	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	DEPTNAME	3	varchar	50				varchar(50)	YES
+COVID19ワクチン接種	EVENTDATE	4	date					date	YES
+COVID19ワクチン接種	更新日時	5	datetime				0	datetime	YES
+COVID19ワクチン接種	問診1_過去2週間の曝露歴	6	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	問診2_濃厚接触者	7	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	問診3_症状の有無	8	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	問診4_家族_同僚症状の有無	9	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	問診5_接種歴	10	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	接種日1回目	11	date					date	YES
+COVID19ワクチン接種	日付不明1回目	12	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	年1回目	13	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	月1回目	14	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	接種日2回目	15	date					date	YES
+COVID19ワクチン接種	日付不明2回目	16	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	年2回目	17	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	月2回目	18	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	接種日3回目	19	date					date	YES
+COVID19ワクチン接種	日付不明3回目	20	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	年3回目	21	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	月3回目	22	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	接種日4回目	23	date					date	YES
+COVID19ワクチン接種	日付不明4回目	24	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	年4回目	25	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	月4回目	26	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	問診6_新型コロナ感染症の罹患歴	27	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	診断日	28	date					date	YES
+COVID19ワクチン接種	診断日日付不明	29	varchar	10				varchar(10)	YES
+COVID19ワクチン接種	診断日年1	30	varchar	40				varchar(40)	YES
+COVID19ワクチン接種	診断日月1	31	varchar	20				varchar(20)	YES
+COVID19ワクチン接種	問診7_過去6か月以内の海外渡航歴	32	varchar	10				varchar(10)	YES
+COVID検査	PATIENTNO	1	varchar	20				varchar(20)	NO
+COVID検査	COLLECTDATE	2	date					date	YES
+COVID検査	TESTITEMCODE	3	varchar	10				varchar(10)	YES
+COVID検査	TESTITEMNAME	4	varchar	50				varchar(50)	YES
+COVID検査	ADDCOMMENT1	5	varchar	255				varchar(255)	YES
+COVID検査	ADDCOMMENT2	6	varchar	255				varchar(255)	YES
+COVID検査	OUTOFSTANDARD	7	varchar	10				varchar(10)	YES
+COVID検査	REPORTVALUE	8	varchar	255				varchar(255)	YES
+COVID検査	MATERIALSNAME	9	varchar	50				varchar(50)	YES
+COVID検査	EDITORIALRESULT	10	varchar	255				varchar(255)	YES
+COVID検査	SPECIMENCOMMENTFLG	11	varchar	10				varchar(10)	YES
+一般検査	PATIENTNO	1	varchar	20				varchar(20)	YES
+一般検査	COLLECTDATE	2	date					date	YES
+一般検査	COLLECTTIME	3	time				0	time	YES
+一般検査	TESTITEMCODE	4	varchar	20				varchar(20)	YES
+一般検査	TESTITEMNAME	5	varchar	100				varchar(100)	YES
+一般検査	ADDCOMMENT1	6	varchar	255				varchar(255)	YES
+一般検査	ADDCOMMENT2	7	varchar	255				varchar(255)	YES
+一般検査	OUTOFSTANDARD	8	varchar	10				varchar(10)	YES
+一般検査	REPORTVALUE	9	varchar	255				varchar(255)	YES
+一般検査	MATERIALSNAME	10	varchar	50				varchar(50)	YES
+一般検査	EDITORIALRESULT	11	varchar	255				varchar(255)	YES
+一般検査	SPECIMENCOMMENTFLG	12	varchar	10				varchar(10)	YES
+入院情報	ADMISSIONNO	1	varchar	20				varchar(20)	YES
+入院情報	DETAILNO	2	varchar	10				varchar(10)	YES
+入院情報	PATIENTNO	3	varchar	20				varchar(20)	YES
+入院情報	SEX	4	varchar	1				varchar(1)	YES
+入院情報	PATIENTAGE	5	int		10	0		int	YES
+入院情報	STARTSTATUS	6	varchar	10				varchar(10)	YES
+入院情報	STARTDATE	7	date					date	YES
+入院情報	ENDSTATUS	8	varchar	10				varchar(10)	YES
+入院情報	ENDDATE	9	date					date	YES
+入院情報	DEPTCODE	10	varchar	10				varchar(10)	YES
+入院情報	DEPTNAME	11	varchar	50				varchar(50)	YES
+入院情報	WARDCODE	12	varchar	10				varchar(10)	YES
+入院情報	ROOMCODE	13	varchar	10				varchar(10)	YES
+入院情報	ADMISSIONDATE	14	date					date	YES
+入院情報	PURPOSECODE	15	varchar	10				varchar(10)	YES
+入院情報	PURPOSENAME	16	varchar	50				varchar(50)	YES
+入院情報	DISFINALDATE	17	date					date	YES
+入院情報	DISREASONCODE	18	varchar	10				varchar(10)	YES
+入院情報	DISREASONNAME	19	varchar	50				varchar(50)	YES
+処方薬剤	PATIENTNO	1	varchar	20				varchar(20)	NO
+処方薬剤	STARTDATE	2	datetime				0	datetime	YES
+処方薬剤	ENDDATE	3	datetime				0	datetime	YES
+処方薬剤	PATIENTTYPE	4	varchar	10				varchar(10)	YES
+処方薬剤	ORDERDEPARTMENT	5	varchar	10				varchar(10)	YES
+処方薬剤	DOSAGECODE	6	varchar	10				varchar(10)	YES
+処方薬剤	DOSAGENAME	7	varchar	90				varchar(90)	YES
+処方薬剤	TIMES	8	int		10	0		int	YES
+処方薬剤	WELFARECODE	9	varchar	30				varchar(30)	YES
+処方薬剤	MEDICINENAME	10	varchar	200				varchar(200)	YES
+処方薬剤	QUANTITY	11	int		10	0		int	YES
+処方薬剤	UNIT1	12	varchar	10				varchar(10)	YES
+外来情報	APPOINTMENTNO	1	varchar	20				varchar(20)	NO
+外来情報	PATIENTNO	2	varchar	20				varchar(20)	NO
+外来情報	DEPARTMENTCODE	3	varchar	10				varchar(10)	YES
+外来情報	DEPARTMENTNAME	4	varchar	50				varchar(50)	YES
+外来情報	SEX	5	varchar	1				varchar(1)	YES
+外来情報	PATIENTAGE	6	int		10	0		int	YES
+外来情報	VISITDATE	7	date					date	YES
+外来情報	VISITTIME	8	varchar	10				varchar(10)	YES
+外来情報	CONSULTSTARTTIME	9	varchar	10				varchar(10)	YES
+外来情報	CONSULTENDTIME	10	varchar	10				varchar(10)	YES
+外来情報	ADMISSIONDEPT	11	varchar	10				varchar(10)	YES
+外来情報	ADMISSIONDEPTNAME	12	varchar	50				varchar(50)	YES
+外来情報	ADMISSIONWARD	13	varchar	10				varchar(10)	YES
+患者基本情報	PATIENTNO	1	varchar	20				varchar(20)	YES
+患者基本情報	SEX	2	varchar	2				varchar(2)	YES
+患者基本情報	BIRTHDAY	3	date					date	YES
+患者基本情報_身長体重	PATIENTNO	1	varchar	20				varchar(20)	NO
+患者基本情報_身長体重	SEX	2	varchar	1				varchar(1)	YES
+患者基本情報_身長体重	HEIGHTWEIGHTSTATUS	3	varchar	2				varchar(2)	YES
+患者基本情報_身長体重	HEIGHTWEIGHT	4	decimal		5	2		decimal(5,2)	YES
+患者基本情報_身長体重	HEIGHTWEIGHTDATE	5	date					date	YES
+注射薬剤	PATIENTNO	1	varchar	20				varchar(20)	NO
+注射薬剤	STARTDATE	2	datetime				0	datetime	YES
+注射薬剤	PATIENTTYPE	3	varchar	10				varchar(10)	YES
+注射薬剤	ORDERDEPARTMENT	4	varchar	10				varchar(10)	YES
+注射薬剤	ACCOUNTSTATUS2	5	varchar	10				varchar(10)	YES
+注射薬剤	ROUTECODE	6	varchar	10				varchar(10)	YES
+注射薬剤	ROUTENAME	7	varchar	100				varchar(100)	YES
+注射薬剤	TIMES	8	int		10	0		int	YES
+注射薬剤	WELFARECODE	9	varchar	20				varchar(20)	YES
+注射薬剤	MEDICINENAME1	10	varchar	100				varchar(100)	YES
+注射薬剤	QUANTITY	11	decimal		10	2		decimal(10,2)	YES
+注射薬剤	SELECTEDUNIT	12	varchar	10				varchar(10)	YES
+注射薬剤	QUANTITY1	13	decimal		10	2		decimal(10,2)	YES
+注射薬剤	UNIT1	14	varchar	10				varchar(10)	YES
+注射薬剤	QUANTITY2	15	decimal		10	2		decimal(10,2)	YES
+注射薬剤	UNIT2	16	varchar	10				varchar(10)	YES
+注射薬剤	QUANTITY3	17	decimal		10	2		decimal(10,2)	YES
+注射薬剤	UNIT3	18	varchar	10				varchar(10)	YES
+病名データ_DPC	PATIENTNO	1	varchar	20				varchar(20)	NO
+病名データ_DPC	NYUINNO	2	varchar	20				varchar(20)	NO
+病名データ_DPC	SEQNO	3	int		10	0		int	NO
+病名データ_DPC	BYOMEICD	4	varchar	20				varchar(20)	YES
+病名データ_DPC	BYOMEI	5	varchar	100				varchar(100)	YES
+病名データ_DPC	SHINRYOKACD	6	varchar	10				varchar(10)	YES
+病名データ_DPC	KAISHIYMD	7	date					date	YES
+病名データ_DPC	SHURYOYMD	8	date					date	YES
+病名データ_カルテオーダ	PATIENTNO	1	varchar	20				varchar(20)	NO
+病名データ_カルテオーダ	DEPARTMENTCODE	2	varchar	10				varchar(10)	YES
+病名データ_カルテオーダ	DISEASECODE	3	varchar	20				varchar(20)	YES
+病名データ_カルテオーダ	DIAGNOSISDISEASE	4	varchar	100				varchar(100)	YES
+病名データ_カルテオーダ	VALIDSTARTDATE	5	datetime				0	datetime	YES
+病名データ_カルテオーダ	VALIDENDDATE	6	datetime				0	datetime	YES
+病名データ_カルテオーダ	MAINDISEASESTATUS	7	varchar	10				varchar(10)	YES
+病名データ_カルテオーダ	FINISHSTATUS	8	varchar	10				varchar(10)	YES
+病名データ_カルテオーダ	DIAGNOSISSTATUS	9	varchar	10				varchar(10)	YES
+請求データ	PATIENTNO	1	varchar	20				varchar(20)	YES
+請求データ	ADMISSIONNO	2	varchar	20				varchar(20)	YES
+請求データ	ADMISSIONDATE	3	datetime				0	datetime	YES
+請求データ	DISFINALDATE	4	datetime				0	datetime	YES
+請求データ	RENNO	5	varchar	10				varchar(10)	YES
+請求データ	APKBN	6	varchar	10				varchar(10)	YES
+請求データ	SEIKYUFROMDTE	7	datetime				0	datetime	YES
+請求データ	SEIKYUENDDTE	8	datetime				0	datetime	YES
+請求データ	HOUKATSUTEN	9	int		10	0		int	YES
+請求データ	DPCDEKIDAKATEN	10	int		10	0		int	YES
+請求データ	DPCSYOKUJI	11	int		10	0		int	YES
+重症度・転帰	ADMISSIONNO	1	varchar	20				varchar(20)	NO
+重症度・転帰	PATIENTNO	2	varchar	20				varchar(20)	NO
+重症度・転帰	ADMISSIONDATE	3	datetime				0	datetime	YES
+重症度・転帰	SHIBOU	4	int		10	0		int	YES
+重症度・転帰	NYUINJCS	5	int		10	0		int	YES
+重症度・転帰	TAIINJCS	6	int		10	0		int	YES
+重症度・転帰	NYUINADL1	7	int		10	0		int	YES
+重症度・転帰	NYUINADL2	8	int		10	0		int	YES
+重症度・転帰	NYUINADL3	9	int		10	0		int	YES
+重症度・転帰	NYUINADL4	10	int		10	0		int	YES
+重症度・転帰	NYUINADL5	11	int		10	0		int	YES
+重症度・転帰	NYUINADL6	12	int		10	0		int	YES
+重症度・転帰	NYUINADL7	13	int		10	0		int	YES
+重症度・転帰	NYUINADL8	14	int		10	0		int	YES
+重症度・転帰	NYUINADL9	15	int		10	0		int	YES
+重症度・転帰	NYUINADL10	16	int		10	0		int	YES
+重症度・転帰	TAIINADL1	17	int		10	0		int	YES
+重症度・転帰	TAIINADL2	18	int		10	0		int	YES
+重症度・転帰	TAIINADL3	19	int		10	0		int	YES
+重症度・転帰	TAIINADL4	20	int		10	0		int	YES
+重症度・転帰	TAIINADL5	21	int		10	0		int	YES
+重症度・転帰	TAIINADL6	22	int		10	0		int	YES
+重症度・転帰	TAIINADL7	23	int		10	0		int	YES
+重症度・転帰	TAIINADL8	24	int		10	0		int	YES
+重症度・転帰	TAIINADL9	25	int		10	0		int	YES
+重症度・転帰	TAIINADL10	26	int		10	0		int	YES
+重症度・転帰	SHUYAKUKBN	27	int		10	0		int	YES

@@ -1,0 +1,80 @@
+USE VACCINE;
+
+DROP TABLE IF EXISTS 入院情報;
+CREATE TABLE  入院情報 (
+    ADMISSIONNO VARCHAR(20) NULL,          -- 入院番号
+    DETAILNO VARCHAR(10) NULL,             -- 詳細番号
+    PATIENTNO VARCHAR(20) NULL,            -- 患者番号
+    SEX VARCHAR(1) NULL,                   -- 性別
+    PATIENTAGE INT NULL,                   -- 患者年齢
+    STARTSTATUS VARCHAR(10) NULL,          -- 開始ステータス
+    STARTDATE DATE NULL,                   -- 開始日 (日付のみ)
+    ENDSTATUS VARCHAR(10) NULL,            -- 終了ステータス
+    ENDDATE DATE NULL,                     -- 終了日 (日付のみ)
+    DEPTCODE VARCHAR(10) NULL,             -- 部署コード
+    DEPTNAME VARCHAR(50) NULL,             -- 部署名
+    WARDCODE VARCHAR(10) NULL,             -- 病棟コード
+    ROOMCODE VARCHAR(10) NULL,             -- 病室コード
+    ADMISSIONDATE DATE NULL,               -- 入院日 (日付のみ)
+    PURPOSECODE VARCHAR(10) NULL,          -- 目的コード
+    PURPOSENAME VARCHAR(50) NULL,          -- 目的名
+    DISFINALDATE DATE NULL,                -- 退院最終日 (日付のみ)
+    DISREASONCODE VARCHAR(10) NULL,        -- 退院理由コード
+    DISREASONNAME VARCHAR(50) NULL         -- 退院理由名
+);
+
+-- SHOW TABLES;
+DESCRIBE 入院情報;
+
+-- LOAD DATA INFILE '/Users/myamaguchi/Data/Vaccin/CH_t02_入院情報_納品.txt'
+LOAD DATA INFILE '/tmp/CH_t02_入院情報_納品.txt'
+INTO TABLE 入院情報
+CHARACTER SET CP932
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS
+(
+    @ADMISSIONNO_STR,
+    @DETAILNO_STR,
+    @PATIENTNO_STR,
+    @SEX_STR,
+    @PATIENTAGE_STR,
+    @STARTSTATUS_STR,
+    @STARTDATE_RAW,
+    @ENDSTATUS_STR,
+    @ENDDATE_RAW,
+    @DEPTCODE_STR,
+    @DEPTNAME_STR,
+    @WARDCODE_STR,
+    @ROOMCODE_STR,
+    @ADMISSIONDATE_RAW,
+    @PURPOSECODE_STR,
+    @PURPOSENAME_STR,
+    @DISFINALDATE_RAW,
+    @DISREASONCODE_STR,
+    @DISREASONNAME_STR
+)
+SET
+    ADMISSIONNO = NULLIF(@ADMISSIONNO_STR, ''),
+    DETAILNO = NULLIF(@DETAILNO_STR, ''),
+    PATIENTNO = NULLIF(@PATIENTNO_STR, ''),
+    SEX = NULLIF(@SEX_STR, ''),
+    STARTSTATUS = NULLIF(@STARTSTATUS_STR, ''),
+    ENDSTATUS = NULLIF(@ENDSTATUS_STR, ''),
+    DEPTCODE = NULLIF(@DEPTCODE_STR, ''),
+    DEPTNAME = NULLIF(@DEPTNAME_STR, ''),
+    WARDCODE = NULLIF(@WARDCODE_STR, ''),
+    ROOMCODE = NULLIF(@ROOMCODE_STR, ''),
+    PURPOSECODE = NULLIF(@PURPOSECODE_STR, ''),
+    PURPOSENAME = NULLIF(@PURPOSENAME_STR, ''),
+    DISREASONCODE = NULLIF(@DISREASONCODE_STR, ''),
+    DISREASONNAME = NULLIF(@DISREASONNAME_STR, ''),
+    PATIENTAGE = NULLIF(@PATIENTAGE_STR, ''),
+    STARTDATE = STR_TO_DATE(NULLIF(@STARTDATE_RAW, ''), '%Y/%m/%d %H:%i:%s'),
+    ENDDATE = STR_TO_DATE(NULLIF(@ENDDATE_RAW, ''), '%Y/%m/%d %H:%i:%s'),
+    ADMISSIONDATE = STR_TO_DATE(NULLIF(@ADMISSIONDATE_RAW, ''), '%Y/%m/%d %H:%i:%s'),
+    DISFINALDATE = STR_TO_DATE(NULLIF(@DISFINALDATE_RAW, ''), '%Y/%m/%d %H:%i:%s');
+
+SELECT * FROM 入院情報 limit 10;
+

@@ -1,0 +1,31 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Tex Compile (make in lec02_AI)",
+			"type": "shell",
+			"command": "make",
+			"options": {
+				"cwd": "${workspaceFolder}/lec02_AI"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$latex",
+			"detail": "lec02_AI/Makefile を使用してTexファイルをコンパイルします。"
+		},
+		{
+			"label": "Tex Clean (make clean in lec02_AI)",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"clean"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/lec02_AI"
+			},
+			"problemMatcher": []
+		}
+	]
+}

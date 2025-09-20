@@ -1,0 +1,171 @@
+
+** L14797
+センキュウ（川）（院外専用）
+15箇所、"センキュウ（院外専用）"に変更
+
+** L98444
+(1366, "Incorrect string value: '\\xF3\\xF4\\x90h\\x88\\xCE...' for column 'MEDICINENAME' at row 98443")
+ﾂﾑﾗ葛根湯加川辛夷(2.5g/包)TJ-2(院外)
+
+%s/ﾂﾑﾗ葛根湯加川辛夷(2.5g\/包)TJ-2(院外)/ﾂﾑﾗ葛根湯(院外)/g
+26箇所変更
+
+** L107241
+
+ﾂﾑﾗ苡仁湯(2.5g/包)TJ-52(院外専用)
+
+%s/ﾂﾑﾗ苡仁湯(2.5g\/包)TJ-52(院外専用)/ﾂﾑﾗ苡仁湯(院外専用)/g
+14箇所変更
+
+** L156315
+(1366, "Incorrect string value: '\\xF3\\xF1\\xE4\\x8F\\x90m...' for column 'MEDICINENAME' at row 156314")
+ﾂﾑﾗ桂枝茯苓丸加苡仁(2.5g/包)TJ125院外
+
+%s/ﾂﾑﾗ桂枝茯苓丸加苡仁(2.5g\/包)TJ125院外/ﾂﾑﾗ桂枝茯苓丸_院外/g
+240箇所変更
+
+** L156433
+(1366, "Incorrect string value: '\\xF4\\xA9\\x8C\\xDC\\x97\\xE8...' for column 'MEDICINENAME' at row 156433")
+ﾂﾑﾗ茵五苓散(2.5g/包)TJ-117(院外)
+
+%sﾂﾑﾗ茵五苓散(2.5g\/包)TJ-117(院外)/ﾂﾑﾗ五苓散(院外)
+11箇所変更
+
+** L161159
+(1366, "Incorrect string value: '\\xF3\\xF1\\xE4\\x8F\\x90m...' for column 'MEDICINENAME' at row 161159")
+
+%s/ｸﾗｼｴ苡仁湯(3.0g\/包)kb-52(院外専用)/ｸﾗｼｴ苡仁湯(院外専用)/g
+06箇所変更
+
+** L175085"
+(1366, "Incorrect string value: '\\xF3\\xF1\\xE4\\x8F\\x90m...' for column 'MEDICINENAME' at row 175085")
+ｸﾗｼｴ苡仁湯ｴｷｽ錠EKT-52(院外専用)
+
+%s/ｸﾗｼｴ苡仁湯ｴｷｽ錠EKT-52(院外専用)/ｸﾗｼｴ仁湯ｴｷｽ錠(院外専用)/g
+03箇所変更
+
+** L536629
+(1366, "Incorrect string value: '\\xF3\\xF4\\x8BA\\xE4P...' for column 'MEDICINENAME' at row 536629")
+ﾂﾑﾗ帰膠艾湯(3.0g/包)TJ-77(院外専用)
+
+%s/ﾂﾑﾗ帰膠艾湯(3.0g\/包)TJ-77(院外専用)/ﾂﾑﾗ帰膠艾湯(院外専用)/g
+24箇所変更
+
+** L559924
+(1366, "Incorrect string value: '\\xF3\\xF4\\x8BA\\x92\\xB2...' for column 'MEDICINENAME' at row 559923")
+ｸﾗｼｴ太虎堂の帰調血飲(2ｇ/包)EK230院外
+
+%s/ｸﾗｼｴ太虎堂の帰調血飲(2ｇ\/包)EK230院外/ｸﾗｼｴ太虎堂EK230院外/g
+
+** L606025
+(1366, "Incorrect string value: '\\xF4\\xA9\\xE4\\xE4\\x93\\x92...' for column 'MEDICINENAME' at row 606025")
+ﾂﾑﾗ茵蒿湯(2.5g/包)TJ-135(院外専用)
+
+%s/ﾂﾑﾗ茵蒿湯(2.5g\/包)TJ-135(院外専用)/ﾂﾑﾗ茵蒿湯TJ-135(院外専用)/g
+18箇所変更
+
+
+** L821763
+(1366, "Incorrect string value: '\\xF3\\xF4\\x90h\\x88\\xCE...' for column 'MEDICINENAME' at row 821763")
+ｸﾗｼｴ葛根湯加川辛夷ｴｷｽ錠EKT-2(院外専用)
+
+%s/ｸﾗｼｴ葛根湯加川辛夷ｴｷｽ錠EKT-2(院外専用)/ｸﾗｼｴ葛根湯EKT-2(院外専用)/g
+2箇所変更
+
+
+** L1272517
+(1366, "Incorrect string value: '\\xF3\\xF4\\x92\\x83\\x92\\xB2...' for column 'MEDICINENAME' at row 1272517")
+ﾂﾑﾗ川茶調散(2.5g/包)TJ-124(院外)
+
+%s/ﾂﾑﾗ川茶調散(2.5g/包)TJ-124(院外)/ﾂﾑﾗTJ-124(院外)/g
+1箇所変更
+
+** L1673397
+(1366, "Incorrect string value: '\\xF3\\xF1\\x8A\\xC3\\x93\\x92...' for column 'MEDICINENAME' at row 1673397")
+ﾂﾑﾗ麻杏甘湯(2.5g/包)TJ-78(院外専用)
+
+%s/ﾂﾑﾗ麻杏甘湯(2.5g\/包)TJ-78(院外専用)/ﾂﾑﾗTJ-78(院外専用)/g
+7箇所変更
+
+** L1272517
+(1366, "Incorrect string value: '\\xF3\\xF4\\x92\\x83\\x92\\xB2...' for column 'MEDICINENAME' at row 1272517")
+ﾂﾑﾗ川茶調散(2.5g/包)TJ-124(院外)
+
+%s/ﾂﾑﾗ川茶調散(2.5g\/包)TJ-124(院外)/ﾂﾑﾗTJ-124(院外)/g
+1箇所変更
+
+** L1808194
+(1366, "Incorrect string value: '\\xF4F\\x93\\x92(2...' for column 'MEDICINENAME' at row 1808194")
+ﾂﾑﾗ三物黄湯(2.5g/包)TJ-121(院外専用)
+
+%s/ﾂﾑﾗ三物黄湯(2.5g\/包)TJ-121(院外専用)/ﾂﾑﾗTJ-121(院外専用)/g
+7箇所変更
+
+** L2292164
+(1366, "Incorrect string value: '\\xF3\\xF4\\x90h\\x88\\xCE...' for column 'MEDICINENAME' at row 2292164")
+ｸﾗｼｴ葛根湯加川辛夷(3.75g/包)KB-2(院外)
+
+%s/ｸﾗｼｴ葛根湯加川辛夷(3.75g\/包)KB-2(院外)/ｸﾗｼｴKB-2(院外)/g
+3箇所変更
+
+** L2395779
+(1366, "Incorrect string value: '\\x87T\\x8A\\xFA\\x97p...' for column 'MEDICINENAME' at row 2395779")
+【治療Ⅰ期用】SK-5307錠(21錠/ｼｰﾄ)(糖内･230056)
+4箇所変更
+
+%s/【治療Ⅰ期用】/治療1期用/g
+%s/【治療Ⅱ期用】/治療2期用/g
+
+** L2395784
+【治療Ⅱ期用】SK-5307錠20mg(糖内･230056)
+
+%s/【治療Ⅱ期用】SK-5307錠20mg(糖内･230056)/【治療Ⅱ期用】SK-5307錠20mg/g
+7箇所変更
+
+
+** L2395779
+(1366, "Incorrect string value: '\\x87T\\x8A\\xFA\\x97p...' for column 'MEDICINENAME' at row 2395779")
+
+
+
+-------------------------------------------
+/private/tmp/CH_t14_その他：病名データ_カルテオーダ_納品.txt
+
+
+(1366, "Incorrect string value: '\\x87W\\x93x' for column 'DIAGNOSISDISEASE' at row 1186")
+%s/Ⅳ/4/g
+%s/Ⅲ/3/g
+%s/Ⅱ/2/g
+%s/Ⅰ/1/g
+%s/Ⅹ/10_/g
+%s/Ⅷ/8/g
+
+(1366, "Incorrect string value: '\\x87U\\x82\\x81\\x8C^...' for column 'DIAGNOSISDISEASE' at row 7821")
+(1366, "Incorrect string value: '\\x87T\\x8C^' for column 'DIAGNOSISDISEASE' at row 31906")
+(1366, "Incorrect string value: '\\x87]3\\x88\\xF6\\x8E...' for column 'DIAGNOSISDISEASE' at row 66723")
+(1366, "Incorrect string value: '\\x87[\\x88\\xF6\\x8Eq...' for column 'DIAGNOSISDISEASE' at row 173928")
+
+------------------
+/Users/myamaguchi/Documents/RWD_import/00Presentation/20250228/RWD_Training/lecDBMS_import/sample/CH_t12_07_注射薬剤_納品.sql
+
+(1366, "Incorrect string value: '\\x87T\\x90\\xC3\\x92\\x8D...' for column 'MEDICINENAME1' at row 225471")
+7箇所変更
+
+(1366, "Incorrect string value: '\\x87U\\x90\\x85\\x90\\xAB...' for column 'MEDICINENAME1' at row 269654")
+8箇所変更
+
+(1366, "Incorrect string value: '\\x87U\\x90\\x85\\x90\\xAB...' for column 'MEDICINENAME1' at row 269654")
+
+%s/ﾍﾌﾟﾀﾊﾞｯｸｽ-2水性懸濁注ｼﾘﾝｼﾞ(10μg\/0.5mL) /
+ヘプタバックス水性懸濁注
+
+
+------------------------------------
+/private/tmp/CH_t12_07_注射薬剤_納品.txt
+連続したスペース＋",というレコードが存在。
+投与経路の集計においてコードが同一で名称がことなるという不具合になるので下記コードで
+訂正した。
+
+%s//",/g
+
+

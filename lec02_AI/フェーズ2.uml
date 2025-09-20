@@ -1,0 +1,33 @@
+@startuml
+title Phase 2: Model Execution and Analysis
+
+' Input from Phase 1
+:"D.model";
+
+repeat
+  partition "Stan Execution" {
+    :Input M.stan;
+    :MCMC Execution;
+    note right
+      Input: D.model, M.stan
+    end note
+    :Output O.stan;
+  }
+  :Convergence Assessment;
+repeat while (Not Converged)
+
+:"O.conv";
+
+:Goodness of Fit;
+note left: Input: D.model
+
+if (Good Fit?) then (yes)
+  :"O.gof";
+  ' This output connects to Phase 3
+else (no)
+  ' This loops back to "Data Preparation" in Phase 1
+  :Requires Model/Data Change;
+  end
+endif
+
+@enduml

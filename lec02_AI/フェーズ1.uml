@@ -1,0 +1,19 @@
+@startuml
+title Phase 1: Data Input and Preparation
+
+start
+
+partition "Data Input" {
+  :"D.Obs, D.Act, M.design";
+}
+
+:Data Preparation;
+note right
+  Combine inputs to create D.model
+end note
+
+' Output of this phase
+:"D.model";
+
+end
+@enduml

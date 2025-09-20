@@ -1,0 +1,5 @@
+{
+    "makefile.makefilePath": "${workspaceFolder}/lec02_AI/Makefile",
+    "plantuml.command": "/opt/homebrew/bin/plantuml",
+    "plantuml.jar": "/opt/homebrew/Cellar/plantuml/1.2025.7/libexec/plantuml.jar"
+}

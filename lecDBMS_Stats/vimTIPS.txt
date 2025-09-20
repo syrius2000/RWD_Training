@@ -1,0 +1,29 @@
+
+# Start/Close
+#   . Start R (default)                                  ,rf
+#   --------------------------------------------------------
+#   . Close R (no save)                                  ,rq
+# Send
+#   --------------------------------------------------------
+#   . Block (cur)                                        ,bb
+#   . Block (cur, echo)                                  ,be
+#   . Block (cur, down)                                  ,bd
+#   . Block (cur, echo and down)                         ,ba
+#   --------------------------------------------------------
+#   --------------------------------------------------------
+#   . Selection (echo and down)                          ,sa
+#   . Selection (evaluate and insert output in new tab)  ,so
+#   --------------------------------------------------------
+#   . Paragraph                                          ,pp
+#   . Paragraph (echo)                                   ,pe
+#   . Paragraph (and down)                               ,pd
+#   . Paragraph (echo and down)                          ,pa
+#   --------------------------------------------------------
+#   . Line                                                ,l
+#   . Line (and down)                                     ,d
+
+# vmap <Space> <Plug>RDSendSelection
+  # . List space                                         ,rl
+  # . Clear console                                      ,rr
+  # . Remove objects and clear console                   ,rm
+

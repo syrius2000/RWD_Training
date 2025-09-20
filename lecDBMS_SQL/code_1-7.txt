@@ -1,0 +1,130 @@
+-- 前年と年商が同じ年度を求める：その1　相関サブクエリの利用
+SELECT year,sale
+  FROM Sales S1
+ WHERE sale = (SELECT sale
+                 FROM Sales S2
+                WHERE S2.year = S1.year - 1)
+ ORDER BY year;
+
+
+-- 前年と年商が同じ年度を求める：その2　ウィンドウ関数の利用
+SELECT year, current_sale
+  FROM (SELECT year,
+               sale AS current_sale,
+               SUM(sale) OVER (ORDER BY year
+                               RANGE BETWEEN 1 PRECEDING
+                                         AND 1 PRECEDING) AS pre_sale
+          FROM Sales) TMP
+ WHERE current_sale = pre_sale
+ ORDER BY year;
+
+SELECT year,
+       sale AS current_sale,
+       SUM(sale) OVER (ORDER BY year
+                       RANGE BETWEEN 1 PRECEDING
+                                 AND 1 PRECEDING) AS pre_sale
+  FROM Sales;
+
+
+-- 成長、後退、現状維持を一度に求める：その1　相関サブクエリの利用
+SELECT year, current_sale AS sale,
+       CASE WHEN current_sale = pre_sale
+              THEN '→'
+            WHEN current_sale > pre_sale
+              THEN '↑'
+            WHEN current_sale < pre_sale
+              THEN '↓'
+            ELSE '-' END AS var
+  FROM (SELECT year,
+               sale AS current_sale,
+               (SELECT sale
+                  FROM Sales S2
+                 WHERE S2.year = S1.year - 1) AS pre_sale
+          FROM Sales S1) TMP
+ ORDER BY year;
+
+
+-- 成長、後退、現状維持を一度に求める：その2　ウィンドウ関数の利用
+SELECT year, current_sale AS sale,
+       CASE WHEN current_sale = pre_sale
+             THEN '→'
+            WHEN current_sale > pre_sale
+             THEN '↑'
+            WHEN current_sale < pre_sale
+             THEN '↓'
+            ELSE '-' END AS var
+  FROM (SELECT year,
+               sale AS current_sale,
+               SUM(sale) OVER (ORDER BY year
+                               RANGE BETWEEN 1 PRECEDING
+                                         AND 1 PRECEDING) AS pre_sale
+          FROM Sales) TMP
+ ORDER BY year;
+
+
+
+
+-- 直近の年と同じ年商の年を選択する：その1　相関サブクエリ
+SELECT year, sale
+  FROM Sales2 S1
+ WHERE sale =
+         (SELECT sale
+            FROM Sales2 S2
+           WHERE S2.year =
+                  (SELECT MAX(year) -- 条件2：条件1を満たす年度の中で最大
+                     FROM Sales2 S3
+                    WHERE S1.year > S3.year)) -- 条件1：自分より過去である
+ ORDER BY year;
+
+
+-- 直近の年と同じ年商の年を選択する：その2　ウィンドウ関数
+SELECT year, current_sale
+  FROM (SELECT year,
+               sale AS current_sale,
+               SUM(sale) OVER (ORDER BY year
+                                ROWS BETWEEN 1 PRECEDING
+                                         AND 1 PRECEDING) AS pre_sale
+          FROM Sales2) TMP
+         WHERE current_sale = pre_sale
+ ORDER BY year;
+
+
+
+-- オーバーラップする期間を調べる
+
+-- 山本氏の投宿日が4日の場合
+DELETE FROM Reservations WHERE reserver = '山本';
+INSERT INTO Reservations VALUES('山本', '2018-11-04', '2018-11-04');
+
+
+-- オーバーラップする期間を求める  その1：相関サブクエリの利用
+SELECT reserver, start_date, end_date
+  FROM Reservations R1
+ WHERE EXISTS
+        (SELECT *
+           FROM Reservations R2
+          WHERE R1.reserver <> R2.reserver -- 自分以外の客と比較する
+            AND ( R1.start_date BETWEEN R2.start_date AND R2.end_date
+                   -- 条件(1)：開始日が他の期間内にある
+               OR R1.end_date BETWEEN R2.start_date AND R2.end_date));
+                   -- 条件(2)：終了日が他の期間内にある
+
+
+-- オーバーラップする期間を求める  その2：ウィンドウ関数の利用
+SELECT reserver, next_reserver
+  FROM (SELECT reserver,
+               start_date,
+               end_date,
+               MAX(start_date) OVER (ORDER BY start_date
+                                      ROWS BETWEEN 1 FOLLOWING
+                                               AND 1 FOLLOWING) AS next_start_date,
+               MAX(reserver)   OVER (ORDER BY start_date
+                                      ROWS BETWEEN 1 FOLLOWING
+                                               AND 1 FOLLOWING) AS next_reserver
+          FROM Reservations) TMP
+ WHERE next_start_date BETWEEN start_date AND end_date;
+
+
+--演習問題：1-6
+
+

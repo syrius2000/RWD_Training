@@ -1,0 +1,38 @@
+# COVID検査の課題
+
+--  数を数える
+SELECT c.EDITORIALRESULT  , count(*) as CNT
+from VACCINE.COVID検査 c
+group by  c.EDITORIALRESULT;
+
+$$ EDITORIALRESULTの中身の判断
+以下に例題を示す。「なにが陽性に該当する」かの定義をしないとならないが、決定されていない。
+         (-)	27029
+     0.67ﾐﾏﾝ	19879
+    ｹﾝｼｭﾂｾｽﾞ	7519
+     1.00ﾐﾏﾝ	1983
+        0.01	1793
+         (+)	836
+        0.03	327
+        0.04	325
+
+## EDITORIALRESULTの中身の空白処理（IT的）
+ｹﾝｼｭﾂｾｽﾞなどトリム作業がなされていない点に注意
+    '    ｹﾝｼｭﾂｾｽﾞ
+
+## COVID19ワクチン接種`
+
+''' SQL
+SELECT * FROM VACCINE.`COVID19ワクチン接種` V
+where 問診5_接種歴 not in ( '' ,'未接種' )
+;
+'''
+
+-- ２回済み	8888
+-- ３回済み	8149
+-- ４回済み	3103
+-- 		2435
+-- 未接種	3515
+-- １回済み	402
+
+

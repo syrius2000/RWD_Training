@@ -1,0 +1,12 @@
+{
+  "hideBanner": false,
+  "hideFooter": false,
+  "hideCWD": false,
+  "hideSandboxStatus": false,
+  "hideModelInfo": false,
+  "hideContextSummary": false,
+  "showMemoryUsage": true,
+  "showLineNumbers": false,
+  "showCitations": true,
+  "vimMode": false
+}

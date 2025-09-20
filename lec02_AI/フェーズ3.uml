@@ -1,0 +1,17 @@
+@startuml
+title Phase 3: Reporting
+
+' Input from Phase 2
+:"O.gof";
+note left
+  Assumes O.conv is also available
+end note
+
+:Parameter Estimation;
+:"O.est";
+
+:Report Generation;
+:"Report";
+
+end
+@enduml

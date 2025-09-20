@@ -1,0 +1,17 @@
+
+SELECT *
+  FROM Students
+ WHERE age IS DISTINCT FROM 20;
+
+
+-- 空文字との連結（Oracle）
+SELECT 'abc' || '' AS string FROM dual;
+
+-- NULLとの連結（Oracle）
+SELECT 'abc' || NULL AS string FROM dual;
+
+
+SELECT 'abc' || str AS string, description
+  FROM EmptyStr;
+
+

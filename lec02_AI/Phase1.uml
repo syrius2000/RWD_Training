@@ -1,0 +1,24 @@
+
+@startuml
+skinparam databaseBackgroundColor LightGray
+skinparam componentStyle rectangle
+
+database DB as "データベース"
+database SaaS as "SaaS"
+
+[商品] as Product
+
+' 頂点にDBを配置
+' DBから時計回りにAI, User, SaaS, Productとなるように関連を記述
+
+DB --> AI : データ提供
+AI --> User : レコメンド/分析結果
+User --> SaaS : 操作/入力
+SaaS --> Product : 商品情報取得
+Product --> DB : 商品データ
+
+' 明示的な位置調整のヒント (PlantUMLは自動レイアウトが強いため、あくまでヒントです)
+' 時計回りの配置を促すために、関連の方向を意識して記述しています。
+' 例えば、AIをDBの右に、UserをAIの右下、SaaSをUserの下、ProductをSaaSの左、DBをProductの上、といったイメージです。
+
+@enduml

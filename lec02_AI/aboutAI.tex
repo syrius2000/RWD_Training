@@ -1,0 +1,517 @@
+% vim: set expandtab shiftwidth=2:ts=2:
+\documentclass[uplatex,dvipdfmx,9pt,a4paper]{beamer}
+\usepackage[T1]{fontenc}                        % ギリシャ文字など出力
+\usepackage{lmodern}                            % フォント警告の抑制
+\usepackage{mathtools}                          % 参照された数式だけ、（１）が付与
+\mathtoolsset{showonlyrefs=true}                % 参照された数式だけ、（１）が付与
+\usepackage[jis2004,deluxe,expert,uplatex]{otf} % 日本語多ウェイト化
+\mathversion{bold}                              % 数式フォント太字
+\usepackage{here}                               % H が使える
+\usepackage{booktabs}                           % 表の\midrule などがつかえる
+\usepackage{moresize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% style=numeric は引用スタイルを番号形式 [1], [2]... にします
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\addbibresource{LLM.bib}                        % default database file
+\usepackage{bxdpx-beamer}                       % dvipdfmxでナビゲーションシンボルを機能させる
+\hypersetup{
+  pdfauthor={山口 学},  % 著者名を明示的に設定
+  pdftitle={2024年度達成事項と分析基盤のあたらしい整備手法},  % タイトル整合確認
+  pdfsubject={AIエージェントの開発とその利用法も紹介}
+}
+\usepackage{pxjahyper}                          % しおりの文字化け対策
+\usepackage{xpatch}
+\xpatchcmd{\ttfamily}{\selectfont}{\fontencoding{T1}\selectfont}{}{}
+\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Madrid}
+\usecolortheme{whale}               % 青基調で背景あり
+% \usecolortheme{seagull}             %
+% \usecolortheme{goeagles}            % ★金と茶のトーン
+% \usecolortheme{seahorse}            %  淡い青のモノトーン
+\usefonttheme{professionalfonts}
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{bibliography item}[number]   % 文献は「番号形式」
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]      % フッターをスライド番号だけに
+\AtBeginSection[]{                              %セクションごとに自動で栞生成
+    \begin{frame}
+        \frametitle{\texorpdfstring{\translate{CURRENT section}}{\insertsectionhead}}
+        \tableofcontents[currentsection]
+    \end{frame}}
+%
+\DeclareSymbolFont{operators}{OT1}{\sfdefault}{m}{n}
+\SetSymbolFont{operators}{bold}{OT1}{\sfdefault}{b}{n}
+\usefonttheme{structurebold} % タイトル部を太字
+\setbeamerfont{alerted text}{series=\bfseries}  % Alertを太字
+\setbeamerfont{section in toc}{series=\mdseries}% 目次は太字にしない
+\setbeamerfont{frametitle}{size=\Large}         % フレームタイトル文字サイズ
+\setbeamerfont{title}{size=\LARGE}              % タイトル文字サイズ
+\setbeamerfont{date}{size=\small}               % 日付文字サイズ
+\setbeamerfont{bibliography item}{size=\footnotesize}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
+% --- tcolorbox (会話風ボックス) の設定 ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+% 会話ボックスの共通スタイル
+\tcbset{
+  chatstyle/.style={
+    boxrule=0.5pt,
+    arc=4mm,
+    fonttitle=\bfseries,
+    fontupper=\small, % ボックス内のフォントサイズをsmallに
+    breakable,
+  }
+}
+
+% 質問者（You）側の会話ボックス
+\newtcolorbox{mychat}{
+  chatstyle,
+  colback=blue!5!white,
+  colframe=blue!75!black,
+  title={You},
+}
+
+% AI（Gemini）側の会話ボックス
+\newtcolorbox{aichat}{
+  chatstyle,
+  colback=green!5!white,
+  colframe=green!65!black,
+  title={Gemini},
+}
+% --- tcolorbox (会話風ボックス) の設定 END ---
+
+% --- listings (プログラムコード表示) の設定 ---
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  language=SQL,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red},
+  breaklines=true,    % 自動で改行
+  frame=single,       % 枠線
+  numbers=left,       % 行番号
+  numberstyle=\tiny\color{gray},
+  captionpos=b,       % キャプションを下に
+  keepspaces=true,    % スペースを維持
+  showstringspaces=false,
+  upquote=true,       % ' を正しく表示
+}
+
+\begin{document}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \title{2024年度達成事項と分析基盤のあたらしい整備手法}
+  \subtitle{AIエージェントの開発とその利用法も紹介}
+  \author{山口 学}
+  \institute{解析センター}
+  \date[]{2025-09-17(Wed)}
+  \maketitle
+\end{frame}
+
+% {RWD用RDBMS、分析環境の整備}
+\section{2024年度達成事項の概略報告}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{2024年度達成事項の概略}
+
+\begin{itemize}
+  \item 既存DBMSのシステム維持管理と集計システムの拡大
+  \pause
+  \item 新規医療情報入手時の効率化（入手手順の革新）
+  \begin{itemize}
+    \item \textbf{ER図の完成と対応医療システムの明確化}
+    \pause
+    \begin{itemize}
+      \item \textbf{最初に必要情報のER図（システムで扱う情報の「設計図」）を明確化}
+      \item \textbf{従来はデータ入手後にER図を作成していたが、ER図を完成してからデータ入手へと転換}
+      \pause
+    \end{itemize}
+    \item 医療システムからの集計、抽出等の作業
+    \begin{itemize}
+      \item 入手した情報を把握するために、テーブル内のドメイン情報を集計し、保存・共有
+      \pause
+    \end{itemize}
+  \end{itemize}
+  \item 解析テーブル作成効率化
+  \item 上記手順のプログラムレベルの公開化・更新効率化
+  \begin{itemize}
+    \item オープンソースシステム（OSS）管理手順の利活用
+    \item 作業の再現性を他者視点で確認・実証
+  \end{itemize}
+\end{itemize}
+\vspace{0.5cm}
+
+\textbf{ER図の作成はデータ入手効率を大きく上げたと考える。}
+
+\end{frame}
+
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{解析テーブル作成効率化と管理手順の保存}
+
+  以下のリポジトリに解析基盤の環境構築手順を保管しています。
+  \vspace{0.5cm}
+
+  \begin{center}
+    \url{https://github.com/syrius2000/RWD_Training.git}
+  \end{center}
+  \vspace{0.5cm}
+
+リポジトリにはRWD解析のためのRDBMS環境構築法やデータインポートを実施するときの注意点、対処方法をまとめた。\\
+
+対応方法は実行可能で再現可能なレベルの単位となっています。
+
+\end{frame}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{従来のRWD解析基盤環境の更新}
+
+  2025前半に有安氏の協力をえて、Terminal
+  操作を体験頂き、｢実施してみないと理解困難」との意見を得た。
+  トレーニング戦略を見直すこととし、案内は延期した。
+  \vspace{0.5cm}
+
+  リポジトリの整理途中で、\textbf{AIアプリの進化が著しい}ことに気づき、従来資料は「今の世代」には難しいと
+  考え、 AIエージェントを利用して「今の世代」がRWD解析環境構築がより効率になれば！と考え方針変更。
+ \vspace{0.5cm}
+
+  \textbf{RWD用プロンプト}を複数作成し、\textbf{コードエージェント化}し、莫大に効率化した？ので
+  紹介する。
+
+\end{frame}
+
+\begin{frame}[fragile]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{従来の環境整備法の概略}
+
+ 各テーマ毎に分割されたスクリプトにより、分析環境は０から構築可能？
+ \vspace{0.5cm}
+
+\small
+\begin{itemize}
+  \item \texttt{.github}: SQLプロンプトなど、GitHubに関連する設定やスクリプトが設置
+  \item \texttt{lec00\_UnixBasic}: Unixの基本操作に関するレクチャー資料で、Pythonスクリプトや設定ファイル
+  \item \texttt{lec01\_commandline}: コマンドライン操作のレクチャー資料で、重複行の処理などを行う各種スクリプト
+  \item \texttt{lec02\_AI}: AIに関するレクチャー資料で、LaTeXソースファイルや参考文献ファイル
+  \item \texttt{lecDBMS\_import}: データベースへのデータインポートに関するレクチャー資料
+  \item \texttt{lecDBMS\_mysql80}: MySQL 8.0の初期設定やテーブル作成、ユーザー管理
+  \item \texttt{lecDBMS\_SQL}: SQLのコードスニペットが保存されたテキストファイル群
+  \item \texttt{lecDBMS\_Stats}: データベースを利用した統計分析のレクチャー資料
+\end{itemize}
+\normalsize
+\vspace{0.5cm}
+
+特筆すべきは\texttt{.github}に保存されたプロンプトである。\\
+
+プロンプトはデータベース構築に最適化された\underline{AIコードエージェント}となり、
+IDE環境（VS CODE等）での開発効率を飛躍的に高め、誰でも同じ出力が可能となる。
+
+
+
+\end{frame}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{詳しくはgithubで概略紹介}
+\begin{center}
+  \url{https://github.com/syrius2000/RWD_Training.git}
+\end{center}
+
+\end{frame}
+
+\section{昭和世代の親父がAI利用で驚いた件}
+
+
+
+\begin{frame}[fragile,allowframebreaks]
+  \frametitle{AIとの会話サンプル}
+  
+  AIエージェントがどれほど強力なのか、私が実際に体験した驚きの事例を会話形式でご紹介します。\\
+  \vspace{0.5cm}
+
+  米田プロトコルでカテゴリ分け用カラムを作成した事例で、
+  % --- 質問者の発言 ---
+  \begin{mychat}
+    利用DBとしてMySQL8.0を用いる。
+    あるテーブルのあるカラムに対し、次の文字列を含むとき"1"、含まないとき"0"を出力するCASE文を作りたい。
+    対象の文字列は以下の通り（先頭が一致すれば良い）：
+    \begin{itemize}
+        \item C00-C26, C30-C34, C37-C41
+        \item C43-C58, C60-C85, C88, C90-C96
+        \item D03, D46, Z85
+    \end{itemize}
+    特に、C00-C26の範囲は、`C00\%`, `C01\%`, ..., `C26\%` のように判定してほしい。
+  \end{mychat}
+
+  % --- AIの回答 ---
+  \begin{aichat}
+    \begin{lstlisting}[language=SQL, basicstyle=\scriptsize\ttfamily, frame=none, upquote=true]
+SELECT
+  your_column,
+  CASE
+    WHEN your_column REGEXP
+    '^(C(0[0-9]|1[0-9]|2[0-6]|3([0-4]|[7-9])|4([0-1]|[3-9])|
+      '5[0-8]|6[0-9]|7[0-9]|8[0-5]|88|9[0-6])|
+      'D(03|46)|Z85)'
+    THEN 1
+    ELSE 0
+  END AS result_flag
+FROM
+    your_table;
+\end{lstlisting}
+  \end{aichat}
+
+  複雑な正規表現をGeminiが作成してくれた。\\
+  しかもプロンプトに合わせて3行表示がやさしい！\\
+  (会社AIで試したら残念な結果・・だった件)
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{このAIの追加指摘がすごい}
+
+  SQLコンパイラー（超高価でOracle Enterprizeぐらいにしかない）様の機能を指摘した！
+
+  \begin{aichat}
+  \begin{scriptsize}
+    はい、ご指摘の通り、この正規表現には複数のカテゴリで\textbf{重複してカウントされる可能性}のあるICDコードが存在します。
+
+  以下に、重複が確認された箇所を具体的に指摘します。
+
+  1. 高血圧性疾患と慢性腎疾患の重複
+
+   * ICDコード: I12 (高血圧性腎疾患)
+   * \textbf{重複するカテゴリ:}
+       * 03.慢性腎疾患: \verb|^I12| のパターンに一致します。
+       * 05.高血圧性疾患: \verb|^I1[0-5]| のパターン（I10～I15）に一致します。
+
+  I12 は、高血圧と腎疾患の両方の性質を持つため、この定義では両方のカテゴリに計上されてしまいます。
+
+  2. 免疫抑制状態とAIDSの重複
+
+   * ICDコード: B20 (免疫不全所見を伴うヒト免疫不全ウイルス（HIV）病)
+   * \textbf{重複するカテゴリ:}
+       * 10.免疫抑制状態: \verb|^B(20|...)| のパターンに一致します。
+       * 11.AIDS: \verb|^B2[0-24]| のパターン（B20～B22, B24）に一致します。
+
+  B20 はAIDSの診断コードであり、同時に免疫抑制状態でもあるため、両方にカウントされます。
+
+  3. 免疫抑制状態と他のカテゴリの重複（移植関連コード）
+
+  10.免疫抑制状態 の正規表現に含まれる Z94
+  は「移植臓器・組織の状態」という大きな括りであり、他のカテゴリに含まれるより詳細なコードと重複しています。
+
+   * ICDコード: Z940 (腎移植の状態)
+       * \textbf{重複するカテゴリ:}
+           * 03.慢性腎疾患: \verb|Z( ... |940| ...)| のパターンに一致します。
+           * 10.免疫抑制状態: \verb|Z( ... |94)| のパターンに一致します。
+
+   * ICDコード: Z942 (肺移植の状態)
+       * \textbf{重複するカテゴリ:}
+           * 02.慢性呼吸器疾患: \verb|Z942| のパターンに一致します。
+           * 10.免疫抑制状態: \verb|Z( ... |94)| のパターンに一致します。
+
+  4. 心血管疾患と慢性腎疾患の重複
+
+   * ICDコード: Q271, Q272
+   * \textbf{重複するカテゴリ:}
+       * 03.慢性腎疾患: \verb|^Q(27[1-2]|60)| のパターンに一致します。
+       * 07.心血管疾患: \verb|^Q2[0-8]| のパターン（Q20～Q28）に一致します。
+
+  Q27（末梢血管系のその他の先天奇形）の一部が、両方のカテゴリに含まれてしまっています。
+  \end{scriptsize}
+  \end{aichat}
+
+  スルーされる可能性があるので解説すれば、「可能性」に言及できるのがすごい！\\
+
+  条件に「重複可能性バグ」が潜んでいてもデータが偶々存在しなかった場合、問題が発生しないことになる。\\
+  \vspace{0.5cm}
+
+  爆弾を抱えたままのプログラムを作って問題にすら気づかないのが素人プログラマである。\\
+  \vspace{0.5cm}
+
+  このような潜在的バグは経験豊富な開発者でも見逃しがちですが、AIはそれを客観的に指摘してくれます。まさに中級以上のプログラマのようです。\\
+  \vspace{0.5cm}
+
+  上級プログラマはUnitテストすら作成し実施するのである。\\
+
+
+\end{frame}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{}
+
+  \huge
+  \begin{center}
+    主題は以上、以下AI関連の余白。
+  \end{center}
+
+\end{frame}
+
+\section{AIに関する基礎的知識と話題}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{AIの役割は質的に変化した}
+  \begin{itemize}
+    \item AIは「物知りな応答者」から「タスクを遂行する実行者」へ
+    \item 本報告では、旧来AIと現代AIを比較し、その進化を解説
+  \end{itemize}
+\end{frame}
+
+% --- スライド 3: 旧来のAI ---
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{旧来のAI：静的な知識を持つ「物知りの百科事典」}
+  \textbf{特徴}
+  \begin{itemize}
+    \item 事前学習した膨大な知識をベースに応答
+    \item 質問応答、文章生成、要約などが得意
+  \end{itemize}
+  \vspace{1em}
+  \textbf{限界}
+  \begin{itemize}
+    \item 知識が学習時点で固定（静的）
+    \item 最新情報やリアルタイムデータにアクセス不可
+    \item 指示されたことしかできず、受動的
+  \end{itemize}
+\end{frame}
+
+% --- スライド 4: 現代のAI ---
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{現代のAI：動的なタスクを遂行する「自律型アシスタント」}
+  \textbf{アーキテクチャ}
+  \begin{itemize}
+    \item LLMを「思考する頭脳」として活用する「AIエージェント」
+  \end{itemize}
+  \vspace{1em}
+  \textbf{主要な能力}
+  \begin{itemize}
+    \item \textbf{自律性}: ゴール達成のための計画を自ら立案・実行
+    \item \textbf{ツール利用}: Web検索、DBアクセス、コード実行などを能動的に使用
+    \item \textbf{知識の動的更新}: MCP等のプロトコルを通じ、リアルタイム情報を取得・反映
+  \end{itemize}
+\end{frame}
+
+% --- スライド 5: Deep Search ---
+\begin{frame}[fragile] % fragileオプションは念のため%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{可能になったこと：「Deep Search」の実現}
+    \begin{itemize}
+        \item 単なる情報検索を超えた、深い調査・分析（Deep Search）が可能に
+        \item \textbf{実行フロー例：「競合製品の市場反応を調査し、報告書を作成」}
+    \end{itemize}
+    \begin{enumerate}
+        \item<1-> \textbf{計画}: 必要な情報（仕様、価格、評判等）を定義
+        \item<2-> \textbf{実行}: Web検索ツールで関連情報を網羅的に収集
+        \item<3-> \textbf{分析}: 複数情報を統合・比較し、強みと弱みを抽出
+        \item<4-> \textbf{生成}: 分析結果に基づき、論理的な報告書を自動生成
+    \end{enumerate}
+\end{frame}
+
+% --- スライド 6: 比較まとめ ---
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{比較まとめ：AIの進化}
+  \begin{itemize}
+    \item \textbf{役割}: 応答者 $\to$ \textbf{実行者}
+    \item \textbf{知識}: 静的 $\to$ \textbf{動的（リアルタイム）}
+    \item \textbf{行動}: 受動的 $\to$ \textbf{能動的・自律的}
+    \item \textbf{能力}: 質問応答 $\to$ \textbf{調査・分析・問題解決}
+  \end{itemize}
+\end{frame}
+
+% --- スライド 7: 結論 ---
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{結論：AIは「知的パートナー」へ}
+  \begin{itemize}
+    \item AIは「知っていること」を答える存在から、「知らないこと」を調べ、解決策を創出する存在へ
+    \item 専門的な調査や分析といった知的労働の自動化が加速
+    \item 今後は、個人の能力を拡張する「知的パートナー」として、あらゆる場面で不可欠になる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{当時の自作AIアプリに関しては}
+
+  かつてはプロンプトを工夫するプロンプトエンジニアリングのみが重点を置かれた。
+  LangChainなどでエージェント作成をめざした。
+  \vspace{0.5cm}
+
+  現在はプロンプトも簡便にMarkDown形式で記載し、LLMで理解させ、MCPや狭い意味のエージェントにて
+  動作させる時代となっている。
+  \vspace{0.5cm}
+
+  コード作成IDE環境を利用すればコードエージェントは現実である。
+
+\end{frame}
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{にんげん負けちゃうな}
+\huge
+\begin{center}
+  Copilot（副操縦士）からAgent（代理人）に
+\end{center}
+
+  \begin{align*}
+    &\textcolor{blue}{P(A|B)} \\
+    &\textcolor{orange}{P(\text{LLM\_Transformer|Prompt})} &= \textcolor{orange}{\text{Chat}}\\
+    &\textcolor{red}{f\left(P(\text{LLM\_Transformer|Prompt})\right)}\footnote{自律的計画、Toolを利用する能力}  &= \textcolor{red}{\text{Agent}}
+  \end{align*}
+
+
+\end{frame}
+
+\section{補遺}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{GPT＝LLM+RLHF+Transformerなのです}
+
+LLMは「補完」\cite{LLMprompt}の仕組みの拡張であり、iPhoneの入力先読み推定が本質。\\
+\vspace{0.5cm}
+Transformer\cite{ytbTransformer}は、画像や文字の「類似度」を測るので「近似画像抽出や類似内容」の検索が可能。
+各社DBMSが開発中で注視すべき事柄です。\\ 
+
+  \begin{align*} % P(LLM|文字列) = 類似文字列
+    &\textcolor{orange}{f(\text{LLM|文字列})}  &= \textcolor{orange}{\text{類似文字列検索}} \\ 
+    &\textcolor{red}{f(\text{Transformer|画像})} &= \textcolor{red}{\text{類似画像検索}} 
+  \end{align*}
+
+\end{frame}
+
+\begin{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{AIが忖度しすぎた問題}
+基礎知識辺のURLでも確認できた
+LLMは「人間のフィードバック（評価）を報酬として利用する強化学習: RLHF（Reinforcement Learning from Human Feedback）」
+を用いて最終的なファインチューニングが行われている。\\
+\vspace{0.5cm}
+
+しかし強すぎるRLHFの景況を受け、忖度問題\cite{ytbgpt5}が発生している。\\
+これは「犯罪まがいのチャット」に対しても「いいですね」が発生するというもの。\\
+
+最新のOpenAI社のGPT-5ではRLHFのロールバック調整を行っているとされる。
+
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frametitle{参照情報}
+  \label{sec:addendum}
+
+  \scriptsize
+  \beamertemplatetextbibitems
+  % 参考文献リストを出力
+  \printbibliography[title=参考情報]
+
+\end{frame}
+
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [containsverbatim] for using verbatim environment and \verb command.
+% [allowframebreaks] for automatic split of frames if the contents do not fit in a single slide.
+% [shrink]  for shrinking the contents to fit in a single slide.
+% [squeeze] for squeezing vertical space.
+% [fragile] for verbatim (new `16/09/06
+% let g:Tex_FoldedEnvironments = 'verbatim,comment,frame,thebibliography,keywords,abstract,titlepage'
