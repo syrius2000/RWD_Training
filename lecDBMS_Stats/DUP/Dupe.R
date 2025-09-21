@@ -41,7 +41,11 @@ WHERE
 "
 
 # 取得したカラムリスト:
-# PATIENTNO,DEPARTMENTCODE,DEPTNAME,EVENTDATE,更新日時,問診1_過去2週間の曝露歴,問診2_濃厚接触者,問診3_症状の有無,問診4_家族_同僚症状の有無,問診5_接種歴,接種日1回目,日付不明1回目,年1回目,月1回目,接種日2回目,日付不明2回目,年2回目,月2回目,接種日3回目,日付不明3回目,年3回目,月3回目,接種日4回目,日付不明4回目,年4回目,月4回目,問診6_新型コロナ感染症の罹患歴,診断日,診断日日付不明,診断日年1,診断日月1,問診7_過去6か月以内の海外渡航歴
+# PATIENTNO,DEPARTMENTCODE,DEPTNAME,EVENTDATE,更新日時,問診1_過去2週間の曝露歴,
+# 問診2_濃厚接触者,問診3_症状の有無,問診4_家族_同僚症状の有無,問診5_接種歴,接種日1回目,日付不明1回目,年1回目,
+# 月1回目,接種日2回目,日付不明2回目,年2回目,月2回目,接種日3回目,日付不明3回目,年3回目,月3回目,
+# 接種日4回目,日付不明4回目,年4回目,月4回目,問診6_新型コロナ感染症の罹患歴,診断日,
+# 診断日日付不明,診断日年1,診断日月1,問診7_過去6か月以内の海外渡航歴
 
 # ステップ2: 全カラムを対象に重複レコードをチェック
 query_check_dupes_covid19 <- "
@@ -51,7 +55,11 @@ FROM (
     SELECT 1
     FROM COVID19ワクチン接種
     GROUP BY
-        PATIENTNO,DEPARTMENTCODE,DEPTNAME,EVENTDATE,更新日時,問診1_過去2週間の曝露歴,問診2_濃厚接触者,問診3_症状の有無,問診4_家族_同僚症状の有無,問診5_接種歴,接種日1回目,日付不明1回目,年1回目,月1回目,接種日2回目,日付不明2回目,年2回目,月2回目,接種日3回目,日付不明3回目,年3回目,月3回目,接種日4回目,日付不明4回目,年4回目,月4回目,問診6_新型コロナ感染症の罹患歴,診断日,診断日日付不明,診断日年1,診断日月1,問診7_過去6か月以内の海外渡航歴
+        PATIENTNO,DEPARTMENTCODE,DEPTNAME,EVENTDATE,更新日時,問診1_過去2週間の曝露歴,
+        問診2_濃厚接触者, 問診3_症状の有無,問診4_家族_同僚症状の有無,問診5_接種歴,
+        接種日1回目,日付不明1回目,年1回目,月1回目, 接種日2回目,日付不明2回目,年2回目,月2回目,
+        接種日3回目,日付不明3回目,年3回目,月3回目,接種日4回目,日付不明4回目,年4回目,月4回目,
+        問診6_新型コロナ感染症の罹患歴,診断日,診断日日付不明,診断日年1,診断日月1,問診7_過去6か月以内の海外渡航歴
     HAVING COUNT(*) > 1
     LIMIT 1
 ) AS subquery_duplicates_check;
@@ -84,7 +92,8 @@ FROM (
     SELECT 1
     FROM COVID検査
     GROUP BY
-        PATIENTNO,COLLECTDATE,TESTITEMCODE,TESTITEMNAME,ADDCOMMENT1,ADDCOMMENT2,OUTOFSTANDARD,REPORTVALUE,MATERIALSNAME,EDITORIALRESULT,SPECIMENCOMMENTFLG
+        PATIENTNO,COLLECTDATE,TESTITEMCODE,TESTITEMNAME,ADDCOMMENT1,ADDCOMMENT2,OUTOFSTANDARD,REPORTVALUE,
+        MATERIALSNAME,EDITORIALRESULT,SPECIMENCOMMENTFLG
     HAVING COUNT(*) > 1
     LIMIT 1
 ) AS subquery_duplicates_check;
