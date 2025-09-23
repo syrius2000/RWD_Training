@@ -1,5 +1,15 @@
 {
-    "makefile.makefilePath": "${workspaceFolder}/lec02_AI/Makefile",
-    "plantuml.command": "/opt/homebrew/bin/plantuml",
-    "plantuml.jar": "/opt/homebrew/Cellar/plantuml/1.2025.7/libexec/plantuml.jar"
+  "yaml.schemas": {
+    "./.github/prompts/frontmatter.schema.json": [
+      ".github/prompts/*.prompt.md",
+      ".github/prompts/*.md",
+      "lec02_AI/*.md",
+      "**/.github/prompts/*.prompt.md",
+      "**/.github/prompts/*.md",
+      "**/lec02_AI/*.md"
+    ]
+  },
+  "makefile.makefilePath": "${workspaceFolder}/lec02_AI/Makefile",
+  "plantuml.command": "/opt/homebrew/bin/plantuml",
+  "plantuml.jar": "/opt/homebrew/Cellar/plantuml/1.2025.7/libexec/plantuml.jar"
 }
